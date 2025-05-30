@@ -6,10 +6,10 @@ import Display from "../components/Display.astro";
 import Bodytext from "../components/Bodytext.astro";
 import Link from "../components/Link.astro";
 import Badge from "../components/Badge.astro";
-import Cardartist from "../components/Cardartist.astro";
 import TicketCard from "../components/TicketCard.astro";   
 import Faq from "../components/Faq.astro"; 
 import Hero2 from "../components/Hero2.astro";
+import Artistcard from "../components/Artistcard.astro";
 
 // FAQ data array 
 /* Smart fordi: consistent, cleaner og nemmere at vedligeholde da man undgår at skulle gentage komponent, men bare kan tilføjes i array */
@@ -154,7 +154,7 @@ const faqs = [
 <div class="flex flex-wrap gap-8 mb-10">
     <!-- Artist Cards Grid -->
     <div class="flex flex-col gap-4">
-        <Cardartist
+        <Artistcard
             url="/singlepage"
             image="/artist1.webp"
             title="Dis Fig ft. Spooky"
