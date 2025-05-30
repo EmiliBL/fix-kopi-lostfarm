@@ -11,6 +11,8 @@ import Bodytext from "../components/Bodytext.astro";
     <img src="/back-icon.svg" alt="Tilbage" class="h-12 w-12 mr-2" />
 </a>
 <!-- slut Pil tilbage -->
+
+<!-- Artist information -->
 <div class="min-h-screen">
     <Heading size="medium" stylingclasses="md:text-5xl md:mb-8 mb-4">Dis Fig ft. Spooky J</Heading>
 
@@ -45,7 +47,9 @@ import Bodytext from "../components/Bodytext.astro";
     <!-- indhold slut -->
 </div>
 </MainLayout>
+<!-- Artist information slut -->
 
+<!-- UI lir  -->
 <script>
     import { inView } from "motion";
 
@@ -55,3 +59,4 @@ inView(FadeIn, () => {
 FadeIn.classList.add("animate__animated", "animate__zoomIn");
 });
 </script>
+<!-- Ui lir Slut -->
