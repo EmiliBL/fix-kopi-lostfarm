@@ -1,0 +1,34 @@
+---
+import Heading from "./typography/Heading.astro"
+import Bodytext from "./typography/Bodytext.astro"
+
+const { heading, smallheading, bodytext, } = Astro.props;
+---
+<section aria-label="FAQ" class="">
+    <Heading size="medium" stylingclasses="md:text-5xl md:mb-10 mb-5">{heading}</Heading>
+</section>
+
+<section class="border-b border-primary-50">
+  <!-- Start spørgsmål -->
+  <div class="collapse collapse-arrow">
+    <input type="radio" name="faq-accordion" />
+
+     <Heading size="xtra-small" stylingclasses="md:text-2xl collapse-title after:text-primary-600"> <!-- after=farven på pilen --> 
+      {smallheading}
+    </Heading>
+
+    <Bodytext size="small-regular" stylingclasses="collapse-content md:text-lg leading-relaxed md:w-[686px]"> <!-- leading-relaxed er linje afstand -->
+      {bodytext} 
+    </Bodytext>
+  </div>
+  <!-- slut spørgsmål -->
+</section>
+
+
+
+
+
+
+
+
+

@@ -1,23 +1,37 @@
 ---
 // Henter parametrene fra Astro.props
-const { href = "#", target = "_self", variant = "primary", size = "medium" } = Astro.props;
+const { href="#", target="_self", variant="tekstlink", 
+size="default" } =Astro.props; 
 
-const linkStyling = "m-3 underline border-double p-1 rounded-s active:bg-red-700 hover:text-white duration-1000 cursor-progress";
+//Tailwind classes - der gør sig gældende for alle knapper)
+const linkStyling="underline text-primary-50"; 
 
-const variantClasses = {
-  primary: "text-blue-600/100 hover:bg-red-600",
-  secondary: "text-black hover:bg-blue-600",
-  standard: "text-blue-400 hover:bg-yellow-500"
+//Styling, der gør sig gældende for de forskellige varianter
+const variantClasses= {
+    "header":"font-montserrat font-bold",
+    "body":"font-lora",
 };
 
-const sizeClasses = {
-  standard: "text-2xl",  
-  large: "text-xl font-bold",
-  medium: "text-base font-semibold",
-  small: "text-sm font-light",
+//Styling, der gør sig gældende for de forskelligeog størrelser.
+const sizeClasses= {
+    "large-bold":"text-4xl",
+    "medium-bold":"text-3xl",
+    "small-bold":"text-2xl",
+    
+    "xtra-large-regular":"text-2xl",
+    "large-regular":"text-xl",
+    "medium-regular":"text-lg",
+    "medium-regular-pink":"text-lg text-primary-600",
+    "small-regular":"text-base",
+    "small-regular-link":"text-base text-primary-600",
+    "xtra-small-regular":"text-sm",
+    "xtra-small-regular-footer":"text-sm text-primary-600",
+
 };
 ---
 
+<!--a tag - der gør det muligt at linke mellem siderne-->
 <a href={href} target={target} class:list={[linkStyling, variantClasses[variant], sizeClasses[size]]}>
-  <slot />
+    <slot/>
 </a>
+

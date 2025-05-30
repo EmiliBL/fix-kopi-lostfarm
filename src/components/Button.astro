@@ -1,47 +1,24 @@
 ---
-import { div } from "motion/react-client";
-
-
 // Henter parametrene fra Astro.props
+const { variant = "filled-primary", size = "responsive-default" } = Astro.props;
 
-const { variant= "primary", size = "medium" } = Astro.props; 
+//Styling, der gør sig gældende for alle knapper
+const buttonStyling = "font-bold font-montserrat cursor-pointer "; 
 
- 
-//Definer den styling (Tailwind classes, der gør sig gældende for alle knapper
-const buttonStyling = "border-double border-4 p-8 rounded-xl hover:bg-red-600 active:bg-red-700 hover:text-white duration-1000 cursor-pointer hover:skew-x-20"; 
-
- 
-//Definer den styling (Tailwind classes), der gør sig gældende for de forskellige varianter 
-
+//Styling, der gør sig gældende for de forskellige varianter 
 const variantClasses = {
-
-"primary": "text-blue-600/100",
-
-"secondary": "text-white bg-red-500 underline hover:bg-blue-600",
-
+    "filled-primary": "px-6 py-2 md:px-10 md:py-2.5 bg-primary-600 text-primary-950 hover:bg-primary-50 focus:bg-primary-600 focus:shadow-drop-25 active:shadow-drop-50 disabled:bg-primary-50 disabled:cursor-not-allowed",
+    "outline-primary": "px-6 py-2 md:px-10 md:py-2.5 border border-primary-600 text-primary-600 hover:bg-primary-50 hover:shadow-drop-25 focus:shadow-drop-50 active:shadow-drop-25 disabled:border-primary-100 disabled:cursor-not-allowed",
+    "filled-secondary": "px-6 py-2 md:px-10 md:py-2.5 bg-primary-950 text-primary-600 hover:bg-primary-900 focus:bg-primary-900 focus:shadow-drop-25 active:shadow-drop-50 active:bg-primary-950 disabled:bg-primary-950 disabled:text-primary-800 disabled:cursor-not-allowed",
+    "outline-secondary": "px-6 py-2 md:px-10 md:py-2.5 border border-primary-950 text-primary-950 hover:bg-primary-800 hover:shadow-drop-25 focus:shadow-drop-50 focus:bg-primary-50 active:shadow-drop-25 disabled:border-primary-800 disabled:cursor-not-allowed",
+    "plus-primary": "px-3 py-1.5 md:px-4 md:py-2 bg-primary-600 text-primary-950 hover:bg-primary-700",
+    "minus-primary": "px-4 py-1.5 md:px-5 md:py-2 bg-primary-300 text-primary-950 hover:bg-primary-400",
 };
 
- 
-//Definer den styling (Tailwind classes), der gør sig gældende for de forskelligeog størrelser.
-
+//Styling, der gør sig gældende for de forskelligeog størrelser.
 const sizeClasses = {
-
-"large": "text-xl font-bold",
-
-"medium": "text-m font-semibold",
-
-"small": "text-s font-light hover:-skew-x-20",
-
+"responsive-default": "text-s md:text-xl ",
 };
-
 ---
-
-<!--Sæt classes for den pågældende knap sammen ved hjælp af Astros class:list -->
-
+<!--Astros class:list sammensætter knappens classes baseret på styling, variant og størrelse-->
 <button class:list={[buttonStyling, variantClasses[variant], sizeClasses[size]]}><slot /></button>
-
-
-
-<!-- Øvelse omkring knap styling <div>
-    <button class="border-double border-4 text-blue-600/100 p-8 rounded-xl hover:bg-red-600 active:bg-red-700 hover:text-white duration-1000 cursor-pointer ..."><slot /></button>
-</div> -->

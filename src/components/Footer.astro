@@ -1,6 +1,54 @@
 ---
+import Heading from "../components/typography/Heading.astro";
+import Bodytext from "../components/typography/Bodytext.astro";
+import Link from "../components/typography/Link.astro";
 ---
-<div class="mt-5">
-<p>Infografik - Emilie</p>
-</div>
-  
+<footer class="border-t border-base-300 text-base-content px-10 py-4 space-y-8 sm:space-y-0 sm:flex sm:justify-between">
+  <!-- Contact -->
+  <nav class="space-y-2">
+    <Heading size="xtra-small">Contact</Heading>
+    <Bodytext size="xtra-small-regular">
+      Generel: <a href="mailto:info@lostfarm.org">info@lostfarm.org</a>
+    </Bodytext>
+    <Bodytext size="xtra-small-regular">
+      Press: <a href="mailto:press@lostfarm.org">press@lostfarm.org</a>
+    </Bodytext>
+    <Link href="/contact" variant="body" size="xtra-small-regular">More information</Link>
+  </nav>
+
+  <!-- Address -->
+  <nav class="space-y-2">
+    <Heading size="xtra-small">Don’t get lost</Heading>
+    <Bodytext size="xtra-small-regular">Oddenvej 243</Bodytext>
+    <Bodytext size="xtra-small-regular">DK-4583 Sjællands Odde</Bodytext>
+  </nav>
+
+  <!-- Info -->
+  <nav class="space-y-2 text-primary-600">
+    <Heading size="xtra-small">Info</Heading>
+    <div class="flex flex-col space-y-2">
+      <Link href="/practical#Faq" variant="body" size="xtra-small-regular">Frequently asked questions</Link>
+      <Link href="/komponentbibliotek" variant="body" size="xtra-small-regular">Komponentbibliotek</Link>
+      <Link href="/about" variant="body" size="xtra-small-regular">Meet the people behind</Link>
+    </div>
+    <Bodytext size="xtra-small-regular">CVR: 44219778</Bodytext>
+  </nav>
+</footer>
+
+<!-- Bottom Footer -->
+<footer class="text-base-content px-5 py-4 space-y-6 md:space-y-4">
+  <div class="md:text-center mb-10 md:mb-4 px-5">
+    <Bodytext htmlheading="p" size="xtra-small-regular">
+      Lost Farm Festival is a non-profit led by local creatives, supporting sustainable art and culture initiatives. Profits fund local projects.
+    </Bodytext>
+  </div>
+
+  <div class="flex justify-between md:items-center px-5">
+    <Bodytext size="xtra-small-regular" stylingclasses="text-primary-600">© Lost Farm 2025</Bodytext>
+    <div class="flex gap-4">
+      <Link href="/contact" variant="body" size="xtra-small-regular-footer">Pixelfed</Link>
+      <Link href="/practical" variant="body" size="xtra-small-regular-footer">Facebook</Link>
+      <Link href="/about" variant="body" size="xtra-small-regular-footer">Instagram</Link>
+    </div>
+  </div>
+</footer>

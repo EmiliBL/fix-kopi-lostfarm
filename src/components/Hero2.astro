@@ -1,0 +1,27 @@
+---
+import Display from "./typography/Display.astro"
+import Bodytext from "./typography/Bodytext.astro"
+
+const { image, alt, display, bodytext } = Astro.props;
+---
+
+<!-- Hero niveau 2 -->
+<section title="Hero-niveau-2" class="mb-10 md:mb-28">
+    <!-- Image -->
+    <div class="w-screen -mx-[50vw] left-1/2 relative mb-5 md:mb-10">
+        <img src={image} alt={alt} class="h-[200px] md:h-[240px] w-full object-cover" />
+    </div>
+
+    <!-- tekst -->
+    <div class="flex flex-col gap-5 mb-8">
+    <!-- Display Overskrift -->
+    <Display size="display-mobile" stylingclasses="md:text-8xl lg:text-8xl mb-5 md:mb-10 text-primary-500">{display}</Display>
+
+        <!-- Bodytext aligned right -->
+        <div class="flex flex-col md:flex-row md:justify-end md:gap-8">
+            <div class="md:w-1/2 md:ml-20">
+            <Bodytext size="small-regular" stylingclasses="md:text-xl">{bodytext}</Bodytext>
+            </div>
+        </div>
+    </div>
+</section>

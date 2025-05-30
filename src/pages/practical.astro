@@ -1,0 +1,135 @@
+---
+import MainLayout from "../layouts/MainLayout.astro"
+import Heading from "../components/typography/Heading.astro"
+import Button from "../components/Button.astro"
+import Bodytext from "../components/typography/Bodytext.astro"
+import Faq from "../components/Faq.astro"
+import Hero2 from "../components/Hero2.astro"
+
+// FAQ data array 
+/* Smart fordi: consistent, cleaner og nemmere at vedligeholde da man undgår at skulle gentage komponent, men bare kan tilføjes i array */
+const faqs = [
+  {
+    heading: "Frequently Asked Questions",
+    smallheading: "Is there camping available?",
+    bodytext: "Yes, free tent camping is available at The Field, right next to Lost Farm HQ. We encourage you to bring a modest-sized tent and enjoy the full festival experience. Please be considerate of fellow guests and the environment. Limited camper van tickets will be available closer to the festival."
+  },
+  {
+    smallheading: "What food and drink options are available?",
+    bodytext: "A variety of delicious food and drink options will be available at the festival, including vegetarian and vegan choices. You’ll find local vendors offering meals, snacks, and beverages throughout the event. Please note that bringing your own alcohol onto the festival site is not permitted, but you are welcome to enjoy your own food and drinks at the campsite."
+  },
+  {
+    smallheading: "What kind of toilet facilities are available?",
+    bodytext: "We provide clean and well-maintained toilet facilities, including standard portable toilets and accessible options. Hand-washing stations will be available throughout the festival site. Please help us keep the facilities tidy for everyone by using the bins provided and reporting any issues to our staff."
+  },
+  {
+    smallheading: "Can I park at the festival?",
+    bodytext: "Yes, there is limited parking available near the festival site. We encourage carpooling whenever possible, as parking spaces are allocated on a first-come, first-served basis. Please follow the signs and directions from our parking staff upon arrival. Overnight parking is allowed for festival guests."
+  },
+  {
+    smallheading: "Can I volunteer at the festival?",
+    bodytext: "Absolutely! We welcome volunteers to help make Lost Farm Festival a wonderful experience for everyone. If you’re interested in volunteering, please reach out to us via our website or social media. Volunteers receive a free ticket and meals during their shifts. We look forward to hearing from you!"
+  }
+];
+---
+
+<MainLayout title="Practical Information"> 
+<!-- start Hero -->
+<Hero2
+    image="/hero_practical.webp"
+    display="Practical information"
+    />
+<!-- slut Hero -->
+
+<!-- start Practical information -->
+<section id="practical-info" class="flex flex-col md:flex-row gap-8 items-start mb-10 md:mb-28">
+    <div class="w-full md:w-1/2">
+        <img src="../overview.webp" alt="Kort over Lost farm festival" class="w-full h-auto" />
+    </div>
+    <div class="w-full md:w-1/2 flex items-center md:mb-10 mb-5 fadein">
+        <Bodytext size="small-regular" stylingclasses="md:text-lg flex flex-col max-w-[65ch]">
+            Lost Farm Festival takes place from August 8-10, 2025, at Lost Farm HQ in Yderby, 
+            a small hamlet surrounded by beautiful fields and the sea. The festival site opens on Friday, August 8th at 12:00 noon, with the program starting shortly after. 
+            The festival concludes on Sunday, August 10th at 11:00 PM, and the campsite closes by 12:00 noon on Monday, August 11th. <br><br> Nearby, you’ll find Havnebyen (Harbour Town), 
+            just a 20-minute walk or a 5-minute bike ride away. On Saturday, the town will host a special fishing competition in collaboration with the Mackrel Master, turning 
+            the harbour into a lively sea of festivities. <br><br> NB: Space is limited. We only have room for 350 participants, and we therefore encourage you to buy your ticket now.
+        </Bodytext>
+    </div>
+</section>
+<!-- slut Practical information -->
+
+<!-- start Tickets and transport -->
+<div class="relative left-1/2 right-1/2 -mx-[50vw] w-screen bg-neutral-50/50 p-16 mb-10 md:mb-28">
+<Heading size="medium" stylingclasses="md:text-5xl gap-4 md:gap-8 items-start mb-5 md:mb-10">Tickets & Transports</Heading>
+<section class="flex flex-col md:flex-row gap-16 items-start mb-5 md:mb-10">
+    <div class="md:w-1/2"> <!-- tom div for højer stilling -->
+    </div>
+    <div class="w-full md:w-1/2 flex flex-col fadein1">
+        <Bodytext size="small-regular" stylingclasses="md:text-lg flex flex-col max-w-[65ch] mb-4 md:mb-8">
+            Here the berries are extra sweet and the apple's freshness makes you weep, the animals are friendly as long you are friendly to them and the grass is just a little greener.
+            Once you’ve have been here, you’ll know why!<br><br> To join the three-day adventure, buy your ticket for 950 DKK. For those traveling from Copenhagen, you can take THE LOST 
+            FARM BUS for 300 DKK (schedule to be announced). Public buses are also available from the Jutland Ferry to Out of Town.
+            Camping is free at The Field next to the festival site.
+        </Bodytext>
+        <!-- CTAer -->
+        <div class="flex flex-col2 md:flex-row gap-4 md:mb-20 mb-10">
+          <a href="/tickets"><Button variant="filled-primary" size="mobile-regular md:desktop-regular" class="w-full md:w-1/2">Buy Ticket</Button></a>
+          <a href="/tickets"><Button variant="outline-primary" size="mobile-regular md:desktop-regular" class="w-full md:w-1/2">Book Transport</Button></a>
+    </div>
+    </div>
+</section>
+</div>
+<!-- slut Tickets and transport -->
+
+<!-- start Camping & Accommodation --> 
+<Heading size="medium" stylingclasses="md:text-5xl gap-4 md:gap-8 items-start mb-5 md:mb-10">Camping & Accommodation</Heading>
+<section class="flex flex-col md:flex-row gap-16 items-start mb-5 md:mb-10">
+    <div class="w-full md:w-1/2 fadein2">
+      <Bodytext size="small-regular" stylingclasses="md:text-lg flex flex-col max-w-[65ch] mb-4 md:mb-8">
+            We want you to enjoy all three days of the festival with us. Free tent camping is available at The Field, just next to Lost Farm HQ. We ask that you leave large party 
+            tents and loud sound systems at home and opt for a modest-sized tent to share with the birds and nature. <br><br> While we encourage Lostfarmers to enjoy themselves, 
+            please respect your fellow festival-goers, the local wildlife, and the surrounding land. Limited camper van tickets will be available closer to the festival, with more
+             information to follow. There are also plenty of other options in the area if you prefer.
+        </Bodytext>  
+    </div>
+    <!-- img-->
+    <div class="w-full md:w-1/2 flex items-center md:mb-8 mb-4">
+        <img src="../map.webp" alt="kort over Lost farm festival" class="w-full h-auto" />  
+    </div>
+</section>
+<!-- slut Camping & Accommodation --> 
+
+<!-- start FAQ -->
+<section id="Faq" class="mb-10 md:mb-28 scroll-mt-24">
+{faqs.map((faq, i) => (
+  <Faq 
+    heading={i === 0 ? faq.heading : undefined}
+    smallheading={faq.smallheading}
+    bodytext={faq.bodytext}
+  />
+))}
+</section>
+<!-- slut FAQ -->
+</MainLayout>
+
+<script>
+  import { inView } from "motion";
+
+const FadeIn = document.querySelector(".fadein");
+
+inView(FadeIn, () => {
+FadeIn.classList.add("animate__animated", "animate__zoomIn");
+});
+
+const FadeIn1 = document.querySelector(".fadein1");
+
+inView(FadeIn1, () => {
+FadeIn1.classList.add("animate__animated", "animate__zoomIn");
+});
+
+const FadeIn2 = document.querySelector(".fadein2");
+
+inView(FadeIn2, () => {
+FadeIn2.classList.add("animate__animated", "animate__zoomIn");
+});
+</script>

@@ -1,5 +1,66 @@
 ---
+import Button from "./Button.astro";
+import Heading from "./typography/Heading.astro";
 ---
-<div>
 
-</div>
+<header class="flex items-center justify-between px-5 md:px-10 bg-primary-900 py-2 md:py-4">
+    <!-- Logo -->
+    <a href="/" class="flex-none">
+        <img src="/lost-logo.svg" alt="Lost Logo" class="h-[50px] md:h-[63px] w-auto inline-block" />
+    </a>
+  <!-- Navigation -->
+  <nav class="flex-none ">
+    <ul class="flex items-center gap-4">
+      <!-- Buy Ticket Button -->
+      
+      <div class="blink-2">
+        <a href="/tickets"><Button variant="filled-primary" size="mobile-regular md:desktop-regular">Buy Ticket</Button></a>
+      </div>
+      <!-- Burger Menu -->
+    <li class="p-4">
+        <div class="relative flex items-center">
+          <!-- on press -->
+          <input type="checkbox" id="user-menu-toggle" class="hidden peer" />
+          <!-- Clickable Label -->
+          <label for="user-menu-toggle" class="z-50 cursor-pointer block w-8 h-8 relative"></label>
+          <!-- Burger ikon  -->
+          <svg class="pointer-events-none absolute w-8 h-8 text-primary-50 transition-opacity duration-300 ease-in-out opacity-100 peer-checked:opacity-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" /></svg>
+          <!-- Kryds ikon -->
+          <svg class="pointer-events-none absolute w-8 h-8 text-primary-50 transition-opacity duration-300 ease-in-out opacity-0 peer-checked:opacity-100 md:peer-checked:opacity-100 md:peer-checked:pointer-events-auto md:peer-checked:static md:peer-checked:ml-auto" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+          
+    <!-- Full screen -->
+      <div class="fixed inset-0 w-screen h-screen bg-primary-900 z-40 pointer-events-none peer-checked:pointer-events-auto transition-transform duration-500 ease-in-out transform translate-x-full peer-checked:translate-x-0 grid-cols-1 md:grid-cols-2 hidden peer-checked:grid">
+        <!-- Kryds ikon på full screen -->
+        <div class="absolute top-6 right-6 z-50">
+          <label for="user-menu-toggle" class="cursor-pointer block">
+            <svg class="w-10 h-10 text-primary-50" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+          </label>
+        </div>
+    <!-- Image -->
+      <div class="hidden md:block bg-cover bg-center" style="background-image: url('/public/nav-image.webp');"></div>
+
+    <!-- Navigation liste -->
+      <div class="flex flex-col justify-center items-start p-10 space-y-4 bg-primary-900 text-primary-50">
+          {[
+            { href: "/tickets", text: "Buy Ticket", extra: "text-primary-500" },
+            { href: "/program", text: "Explore the Program" },
+            { href: "/about", text: "Read About the Festival" },
+            { href: "/theme", text: "Lost Farm Festival Theme" },
+            { href: "/partners", text: "Funding & Partners" },
+            { href: "/practical", text: "Practical Information", extra: "mb-5 md:mb-10" },
+            { href: "/contact", text: "Contact", size: "text-base md:text-2xl" }
+            ].map(({ href, text, extra = "", size = "md:text-4xl" }) => (
+              <a href={href} class="hover:underline hover:text-primary-500">
+                <Heading size="small" stylingclasses={`${size} hover:text-primary-500 ${extra}`}>{text}</Heading>
+              </a>
+          ))}
+        </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </nav>
+</header>

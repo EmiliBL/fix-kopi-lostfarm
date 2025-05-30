@@ -1,0 +1,53 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Button from '../components/Button.astro';
+import Heading from "../components/typography/Heading.astro";
+import Bodytext from "../components/typography/Bodytext.astro";
+import Hero2 from "../components/Hero2.astro";
+---
+
+<MainLayout title="Theme">
+<!-- start hero -->
+<div>
+    <Hero2 
+        image="/hero_theme.webp"
+        display="Lost Farm Festival Theme"
+        bodytext="The theme for Lost Farm Festival 2025, Dark Skies – Brighter Light, celebrates the contrasts of our world through a program co-created with artists, locals, and the landscape. This journey through diverse energies invites Lostfarmers to explore the complexities of our shared existence while moving through the wild beauty of the natural surroundings." 
+        />
+</div>
+<!-- slut hero -->
+<!-- start section 2--> 
+<div class="relative left-1/2 right-1/2 -mx-[50vw] w-screen bg-neutral-50/50 p-10 mb-10 md:mb-28">
+<Heading size="medium" stylingclasses="md:text-5xl mb-5 md:mb-10">An Adventure Through Art and Sound</Heading>
+    <section id="practical-info" class="flex flex-col md:flex-row gap-4 md:gap-8 items-start ">
+        <div class="w-full md:w-1/2">
+            <div class="flex flex-col max-w-[65ch]">
+                <Bodytext size="small-regular" stylingclasses="md:text-lg mb-2 md:mb-4">
+                        From hyper-pop parties that pulse with energy to intimate plant meditations and saunagus, the program offers a flow of unexpected contrasts. Experience everything from outdoor nudejazz and nu-metal to hardcore bass performances that tap into the rhythms of our collective hearts. <br><br>
+                        This year, we encourage cultural companions to share stories from the margins, celebrating joy as an act of resistance. As we stumble through traditional lamentations at dawn, we seek to deepen human connection through the power of live art. And of course, we invite you to have a lot of fun along the way!        
+                </Bodytext>
+            </div>
+            <div class="flex flex-col2 md:flex-row gap-4 md:mb-20 mb-10">
+                <a href="/tickets"><Button variant="filled-primary" size="mobile-regular md:desktop-regular" class="w-full md:w-1/2">Buy Ticket</Button></a>
+                <a href="/program"><Button variant="outline-primary" size="mobile-regular md:desktop-regular" class="w-full md:w-1/2">Explore Program</Button></a>
+            </div>
+        </div>
+            <div class="w-full md:w-1/2 text-center px-5 fadein">
+                <Heading size="xtra-small" stylingclasses="md:text-2xl text-primary-900 max-w-[65ch] mb-2 md:mb-4">"I’m drawn to contrasts and how emotions like joy, rage, humor, and sadness coexist. Through Dark Skies & Brighter Light (...)"</Heading>
+                <Bodytext size="small-regular" stylingclasses=" text-primary-900 text-right">Jude Bennett<br>Co-founder, Lost Farm</Bodytext>
+            </div>       
+        </div>
+    </section>
+</div>
+<!-- slut section 2--> 
+</MainLayout>
+
+<script>
+    import { inView } from "motion";
+
+const FadeIn = document.querySelector(".fadein");
+
+inView(FadeIn, () => {
+FadeIn.classList.add("animate__animated", "animate__zoomIn");
+});
+</script>

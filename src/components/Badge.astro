@@ -1,0 +1,22 @@
+---
+// Henter parametrene fra Astro.props
+const { variant = "primary", size = "responsive-default" } = Astro.props;
+
+//Styling, der gør sig gældende for alle badget
+const badgeStyling = "font-bold font-montserrat px-4 py-3"; 
+
+//Styling, der gør sig gældende for de forskellige varianter 
+const variantClasses = {
+    "music": "bg-primary-50 text-primary-900",
+    "art":  "bg-primary-200 text-primary-900",
+    "talks":  "bg-primary-600 text-primary-900",
+    "event":  "bg-primary-700 text-primary-900",
+};
+
+//Styling, der gør sig gældende for de forskelligeog størrelser.
+const sizeClasses = {
+  "responsive-default": "text-s md:text-xl w-auto",
+};
+---
+<!--Astros class:list sammensætter badgens classes baseret på styling, variant og størrelse -->
+<span class:list={[badgeStyling, variantClasses[variant], sizeClasses[size]]}><slot /></span>

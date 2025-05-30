@@ -1,0 +1,193 @@
+---
+import MainLayout from "../layouts/MainLayout.astro"
+import Hero2 from "../components/Hero2.astro"
+import Heading from "../components/typography/Heading.astro"
+import Card_Artist from "../components/Card_artist.astro"
+
+/* Kunstner-array = datakilde. Mere fleksibel og vedligeholdelsesvenlig kode. Gør det muligt at implementere filter */
+const artists = [
+  {
+    url: "/singlepage",
+    image: "/artist1.webp",
+    title: "Dis Fig ft. Spooky",
+    stage: "Scene 1",
+    genre: "Electronic",
+    time: "kl. 20:30",
+    badgeVariant: "music",
+    badgeText: "Music",
+  },
+  {
+    url: "/singlepage",
+    image: "/artist2.webp",
+    title: "Fatal Waves",
+    stage: "By the harbour",
+    genre: "Art",
+    time: "kl. 16:00",
+    badgeVariant: "talks",
+    badgeText: "Talks",
+  },
+  {
+    url: "/singlepage",
+    image: "/artist3.webp",
+    title: "Croquies Collective",
+    stage: "On the field",
+    genre: "Event",
+    time: "kl. 12:00",
+    badgeVariant: "event",
+    badgeText: "Event",
+  },
+  {
+    url: "/singlepage",
+    image: "/artist4.webp",
+    title: "Safe house",
+    stage: "Scene 3",
+    genre: "Drawing",
+    time: "kl. 10:00",
+    badgeVariant: "art",
+    badgeText: "Art",
+  },
+  {
+    url: "/singlepage",
+    image: "/artist5.webp",
+    title: "SIKSA",
+    stage: "Scene 1",
+    genre: "Art",
+    time: "kl. 22:00",
+    badgeVariant: "music",
+    badgeText: "Music",
+  },
+  {
+    url: "/singlepage",
+    image: "/artist2.webp",
+    title: "Circles of light",
+    stage: "On the field",
+    genre: "Art",
+    time: "kl. 12:00",
+    badgeVariant: "art",
+    badgeText: "Art",
+  },
+    {
+    url: "/singlepage",
+    image: "/artist1.webp",
+    title: "Dis Fig ft. Spooky",
+    stage: "Scene 1",
+    genre: "Electronic",
+    time: "kl. 20:30",
+    badgeVariant: "music",
+    badgeText: "Music",
+  },
+  {
+    url: "/singlepage",
+    image: "/artist2.webp",
+    title: "Fatal Waves",
+    stage: "By the harbour",
+    genre: "Art",
+    time: "kl. 16:00",
+    badgeVariant: "talks",
+    badgeText: "Talks",
+  },
+  {
+    url: "/singlepage",
+    image: "/artist3.webp",
+    title: "Croquies Collective",
+    stage: "On the field",
+    genre: "Event",
+    time: "kl. 12:00",
+    badgeVariant: "event",
+    badgeText: "Event",
+  },
+  {
+    url: "/singlepage",
+    image: "/artist4.webp",
+    title: "Safe house",
+    stage: "Scene 3",
+    genre: "Drawing",
+    time: "kl. 10:00",
+    badgeVariant: "art",
+    badgeText: "Art",
+  },
+  {
+    url: "/singlepage",
+    image: "/artist5.webp",
+    title: "SIKSA",
+    stage: "Scene 1",
+    genre: "Art",
+    time: "kl. 22:00",
+    badgeVariant: "music",
+    badgeText: "Music",
+  },
+  {
+    url: "/singlepage",
+    image: "/artist2.webp",
+    title: "Circles of light",
+    stage: "On the field",
+    genre: "Art",
+    time: "kl. 12:00",
+    badgeVariant: "art",
+    badgeText: "Art",
+  },
+];
+---
+<MainLayout title="Program">
+<!-- Start Hero -->
+<Hero2 
+    image="/hero_program.webp"
+    alt="Festival Program"
+    display="Festival Program"
+/>
+<!-- Slut Hero -->
+
+<!--Start Filter function -->
+<section id="filter" class="flex gap-2 md:gap-4 mb-5 md:mb-10">
+  <button type="button" class="text-primary-50 filter-button text-xl md:text-2xl font-bold tracking-wide hover:underline hover:cursor-pointer" data-filter="all"> Full program </button>
+  <button type="button" class="text-primary-50 filter-button text-xl md:text-2xl font-bold tracking-wide hover:underline hover:cursor-pointer" data-filter="music"> Friday </button>
+  <button type="button" class="text-primary-50 filter-button text-xl md:text-2xl font-bold tracking-wide hover:underline hover:cursor-pointer" data-filter="event"> Saturday </button>
+  <button type="button" class="text-primary-50 filter-button text-xl md:text-2xl font-bold tracking-wide hover:underline hover:cursor-pointer" data-filter="art"> Sunday </button>
+</section>
+<!-- Slut Filter function -->
+
+
+<!-- card section til mappeing af data til komponent & til filter funktion. Handels the collection of cards -->
+<section id="artist-list" style="display: flex; flex-wrap: wrap;" class="artist-grid mb-10 md:mb-28 flex flex-wrap gap-4">
+        {artists.map(artist => (
+            <a href={artist.url} class="artist-card staggeranimation" data-badge={artist.badgeVariant} style="text-decoration: none; color: inherit;">
+                <Card_Artist
+                    url={artist.url}
+                    image={artist.image}
+                    title={artist.title}
+                    stage={artist.stage}
+                    genre={artist.genre}
+                    time={artist.time}
+                    badgeVariant={artist.badgeVariant}
+                    badgeText={artist.badgeText}
+                />
+            </a>
+        ))}
+</section>
+<!-- Card section slut -->
+
+<!-- Script til at filter i badges -->
+ <script type="module" is:inline>
+  const buttons = document.querySelectorAll('.filter-button');
+  const cards = document.querySelectorAll('.artist-card');
+
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      const filter = button.getAttribute('data-filter');
+
+      // Filter cards
+      cards.forEach(card => {
+        const badge = card.getAttribute('data-badge');
+        card.style.display = (filter === 'all' || badge === filter) ? '' : 'none';
+      });
+
+      // Update active button styles
+      buttons.forEach(btn => btn.classList.remove('text-primary-500', 'underline'));
+      button.classList.add('text-primary-500', 'underline');
+    });
+  });
+</script>
+<!-- slut Script til at filter i badges -->
+
+</MainLayout>
+

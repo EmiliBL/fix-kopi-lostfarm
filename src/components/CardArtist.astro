@@ -1,0 +1,50 @@
+---
+import Heading from "../components/typography/Heading.astro";
+import Button from "../components/Button.astro";
+import Badge from "../components/Badge.astro";
+const { image, title, time, stage, genre, badgeVariant, badgeText } = Astro.props;
+---
+  <!-- Definere hele cardet (for mere responsivitet, brug w-full) -->
+<div class="relative w-[210px] md:w-[434px] h-[300px] md:h-auto overflow-hidden">
+  <img src={image} alt={title} class="w-full h-full object-cover" />
+
+  <!-- Definere badges -->
+  <div class="absolute top-2 left-3 z-30">
+    <Badge variant={badgeVariant} size="responsive-default">{badgeText}</Badge>
+  </div>
+
+  <!-- Blur overlay i bunden -->
+  <div class="absolute bottom-0 left-0 w-full h-4/5 md:h-4/5 backdrop-blur-md pointer-events-none"
+    style="mask-image: linear-gradient(to top, black 75%, transparent 100%);">
+  </div>
+
+  <!-- Overskriften + indhold-->
+  <div class="absolute bottom-0 left-0 w-full p-4 z-10">
+    <div class="mb-2 md:mb-4">
+      <Heading size="xtra-xtra-small" stylingclasses="md:text-4xl">{title}</Heading>
+    </div>
+
+<!-- Tekst & ikoner -->
+    <div class="flex flex-col gap-1">
+      <div class="flex items-center gap-3 md:gap-5 ">
+        <img src="/tid-icon.svg" alt="tid" class="w-4 h-4 md:w-6 md:h-6" />
+        <Heading stylingclasses="text-sm md:text-xl">{time}</Heading>
+      </div>
+
+      <div class="flex items-center gap-3 md:gap-5">
+        <img src="/sted-icon.svg" alt="sted" class="w-4 h-4 md:w-6 md:h-6" />
+        <Heading stylingclasses="text-sm md:text-xl">{stage}</Heading>
+      </div>
+
+      <div class="flex items-center gap-3 md:gap-5">
+        <img src="/genre-icon.svg" alt="genre" class="w-4 h-4 md:w-6 md:h-6" />
+        <Heading stylingclasses="text-sm md:text-xl">{genre}</Heading>
+      </div>
+    </div>
+
+<!-- knappen -->
+    <p class="pb-spaceing-2-5 mb-2 mt-2 md:mb-4 md:mt-4">
+      <Button variant="filled-primary" size="responsive-default">Read more</Button>
+    </p>
+  </div>
+</div>

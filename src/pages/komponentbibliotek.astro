@@ -1,0 +1,211 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Button from "../components/Button.astro";
+import Heading from "../components/typography/Heading.astro";
+import Display from "../components/typography/Display.astro";
+import Bodytext from "../components/typography/Bodytext.astro";
+import Link from "../components/typography/Link.astro";
+import Badge from "../components/Badge.astro";
+import Card_Artist from "../components/Card_artist.astro";
+import TicketCard from "../components/TicketCard.astro";   
+import Faq from "../components/Faq.astro"; 
+import Hero2 from "../components/Hero2.astro";
+
+// FAQ data array 
+/* Smart fordi: consistent, cleaner og nemmere at vedligeholde da man undgår at skulle gentage komponent, men bare kan tilføjes i array */
+const faqs = [
+  {
+    heading: "Frequently Asked Questions",
+    smallheading: "Is there camping available?",
+    bodytext: "Yes, free tent camping is available at The Field, right next to Lost Farm HQ. We encourage you to bring a modest-sized tent and enjoy the full festival experience. Please be considerate of fellow guests and the environment. Limited camper van tickets will be available closer to the festival."
+  },
+  {
+    smallheading: "What food and drink options are available?",
+    bodytext: "A variety of delicious food and drink options will be available at the festival, including vegetarian and vegan choices. You’ll find local vendors offering meals, snacks, and beverages throughout the event. Please note that bringing your own alcohol onto the festival site is not permitted, but you are welcome to enjoy your own food and drinks at the campsite."
+  },
+  {
+    smallheading: "What kind of toilet facilities are available?",
+    bodytext: "We provide clean and well-maintained toilet facilities, including standard portable toilets and accessible options. Hand-washing stations will be available throughout the festival site. Please help us keep the facilities tidy for everyone by using the bins provided and reporting any issues to our staff."
+  },
+  {
+    smallheading: "Can I park at the festival?",
+    bodytext: "Yes, there is limited parking available near the festival site. We encourage carpooling whenever possible, as parking spaces are allocated on a first-come, first-served basis. Please follow the signs and directions from our parking staff upon arrival. Overnight parking is allowed for festival guests."
+  },
+  {
+    smallheading: "Can I volunteer at the festival?",
+    bodytext: "Absolutely! We welcome volunteers to help make Lost Farm Festival a wonderful experience for everyone. If you’re interested in volunteering, please reach out to us via our website or social media. Volunteers receive a free ticket and meals during their shifts. We look forward to hearing from you!"
+  }
+];
+---
+<MainLayout title="Komponentbibliotek" class="bg-neutral-50">
+
+    <!-- start på buttons -->
+    <section class="px-10">
+    <Heading htmlheading="h2" size="large" stylingclasses="m-sectionheading text-accent">Buttons</Heading>
+    <div class="flex flex-wrap gap-6 mb-10">
+        <div class="flex flex-col gap-4">
+            <Button variant="filled-primary" size="desktop-regular">Filled primary desktop</Button>
+            <Button variant="outline-primary" size="desktop-regular">Outline primary desktop</Button>
+            <Button variant="filled-secondary" size="desktop-regular">Filled secondary desktop</Button>
+            <Button variant="outline-secondary" size="desktop-regular">Outline secondary desktop</Button>
+        </div>
+        <div class="flex flex-col gap-4">
+            <Button variant="filled-primary" size="mobile-small">Filled primary mobile</Button>
+            <Button variant="outline-primary" size="mobile-small">Outline primary mobile</Button>
+            <Button variant="filled-secondary" size="mobile-small">Filled secondary mobile</Button>
+            <Button variant="outline-secondary" size="mobile-small">Outline secondary mobile</Button>
+        </div>
+        <div class="flex flex-col gap-4 justify-end">
+            <Button variant="plus" size="desktop-counter">+</Button>
+            <Button variant="minus" size="desktop-counter">-</Button>
+        </div>
+    </div>
+    <hr class="mt-20 border-accent">
+    </section>
+    <!-- slut på buttons -->
+
+    <!-- start på badge -->
+    <section class="container mx-auto m-sectiontop px-4">
+    <Heading htmlheading="h2" size="large" stylingclasses="m-sectionheading">Badge</Heading>
+    <div class="flex flex-wrap gap-6 items-center mb-10">
+        <Badge variant="music" size="desktop-regular">Music badge</Badge>
+        <Badge variant="art" size="desktop-regular">Art badge</Badge>
+        <Badge variant="talks" size="desktop-regular">Talks badge</Badge>
+        <Badge variant="event" size="desktop-regular">Event badge</Badge>
+    </div>
+    <hr class="mt-20 border-accent">
+    </section>
+    <!-- start på badge -->
+
+    
+    <!-- start på link -->
+    <section class="container mx-auto m-sectiontop px-4">
+        <Heading htmlheading="h2" size="large" stylingclasses="m-sectionheading text-accent">Links</Heading>
+        <div class="mb-8">
+            <p>
+                <Link>Default link</Link> 
+            </p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-10">
+            <div>
+                <p><Link href="#" variant="header" size="large-bold">Header Large Bold</Link></p>
+                <p><Link href="#" variant="header" size="medium-bold">Header Medium Bold</Link></p>
+                <p><Link href="#" variant="header" size="small-bold">Header Small Bold</Link></p>
+            </div>
+            <div>
+                <p><Link href="#" variant="body" size="xtra-large-regular">Body Xtra Large Regular</Link></p>
+                <p><Link href="#" variant="body" size="large-regular">Body Large Regular</Link></p>
+                <p><Link href="#" variant="body" size="medium-regular">Body Medium Regular</Link></p>
+            </div>
+            <div>
+                <p><Link href="#" variant="body" size="small-regular">Body Small Regular</Link></p>
+                <p><Link href="#" variant="body" size="xtra-small-regular">Body Xtra Small Regular</Link></p>
+            </div>
+        </div>
+        <hr class="mt-20 border-accent">
+    </section>
+    <!-- slut på link -->
+    
+    <!-- start på typografi -->
+    <section class="container mx-auto m-sectiontop px-4">
+        <Heading htmlheading="h2" size="large" stylingclasses="m-sectionheading text-accent">Typografi</Heading>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-10">
+            <!-- Display styles -->
+            <div>
+                <h3 class="font-semibold mb-2 text-accent">Display</h3>
+                <Display htmldisplay="h1" size="display-web" stylingclasses="mb-2 text-primary-50">Display web</Display>
+                <Display htmldisplay="h2" size="display-mobile" stylingclasses="mb-2 text-primary-50">Display mobile</Display>
+            </div>
+            <!-- Heading styles -->
+            <div>
+                <h3 class="font-semibold mb-2 text-accent">Headings</h3>
+                <Heading htmlheading="h3" size="xtra-large" stylingclasses="mb-1">h1 xtra large</Heading>
+                <Heading htmlheading="h4" size="large" stylingclasses="mb-1">h2 large</Heading>
+                <Heading htmlheading="h5" size="medium" stylingclasses="mb-1">h3 medium</Heading>
+                <Heading htmlheading="h6" size="small" stylingclasses="mb-1">h4 small</Heading>
+                <Heading htmlheading="h7" size="xtra-small" stylingclasses="mb-1">h5 xtra small</Heading>
+                <Heading htmlheading="h8" size="xtra-xtra-small">h6 xtra xtra small</Heading>
+            </div>
+        </div>
+        <!-- Body text styles -->
+        <div>
+            <h3 class="font-semibold mb-2 text-accent">Body Text</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <Bodytext htmlheading="p" size="xtra-large-bold">Body text xtra large bold</Bodytext>
+                <Bodytext htmlheading="p" size="xtra-large-regular">Body text xtra large regular</Bodytext>
+                <Bodytext htmlheading="p" size="large-bold">Body text large bold</Bodytext>
+                <Bodytext htmlheading="p" size="large-regular">Body text large regular</Bodytext>
+                <Bodytext htmlheading="p" size="medium-bold">Body text medium bold</Bodytext>
+                <Bodytext htmlheading="p" size="medium-regular">Body text medium regular</Bodytext>
+                <Bodytext htmlheading="p" size="small-bold">Body text small bold</Bodytext>
+                <Bodytext htmlheading="p" size="small-regular">Body text small regular</Bodytext>
+                <Bodytext htmlheading="p" size="xtra-small-bold">Body text xtra small bold</Bodytext>
+                <Bodytext htmlheading="p" size="xtra-small-regular">Body text xtra small regular</Bodytext>
+            </div>
+        </div>
+        <hr class="mt-20 border-accent">
+    </section>
+    <!-- slut på typografi -->
+    
+    <!-- start på card -->
+    <section class="container mx-auto m-sectiontop px-4">
+    <Heading htmlheading="h2" size="large" stylingclasses="m-sectionheading">Cards</Heading>
+<!-- Artist card -->
+<div class="flex flex-wrap gap-8 mb-10">
+    <!-- Artist Cards Grid -->
+    <div class="flex flex-col gap-4">
+        <Card_Artist
+            url="/singlepage"
+            image="/artist1.webp"
+            title="Dis Fig ft. Spooky"
+            stage="Scene 1"
+            genre="Electronic"
+            time="kl. 20:30"
+            badgeVariant="music"
+            badgeText="Music"
+        />
+    </div>
+    <!-- Ticket Cards Grid -->
+    <div class="flex flex-col gap-4">
+        <TicketCard 
+            title="3-days Ticket"
+            description="Adgang til en ekThis ticket gives access to 3 days of art, music, and performances."
+            price="950 DKK"
+            buttonText="Buy Ticket"
+        />
+        <!-- Add more <TicketCard /> components here if needed -->
+    </div>
+</div>
+    <hr class="mt-20 border-accent">
+    </section>
+    <!-- slut på card -->
+
+    <!-- Faq -->
+    <section class="container mx-auto m-sectiontop px-4">
+    <Heading htmlheading="h2" size="large" stylingclasses="m-sectionheading">Faq</Heading>
+    {faqs.map((faq, i) => (
+  <Faq 
+    heading={i === 0 ? faq.heading : undefined}
+    smallheading={faq.smallheading}
+    bodytext={faq.bodytext}
+  />
+))}
+    <hr class="mt-20 border-accent">
+    </section>
+<!-- Faq slut -->
+
+    <!-- Hero 2 -->
+    <section class="container mx-auto m-sectiontop px-4">
+    <Heading htmlheading="h2" size="large" stylingclasses="m-sectionheading">Hero niveau 2</Heading>
+        <Hero2
+        image="../partners-hero.webp"
+        alt="Funding & Partners"
+         display="Funding & Partners"
+         bodytext="Lorem impsum"
+/>
+    <hr class="mt-20 border-accent">
+    </section>
+     <!-- Slut Hero 2 -->
+    </MainLayout>
+    
+    

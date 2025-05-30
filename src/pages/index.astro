@@ -1,23 +1,68 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 import Button from '../components/Button.astro';
-import Link from '../components/Link.astro';
-import { Image } from 'astro:assets';
-
+import Heading from "../components/typography/Heading.astro";
+import Bodytext from "../components/typography/Bodytext.astro";
+import Display from "../components/typography/Display.astro";
+import 'animate.css';
 ---
+<MainLayout title="Forside">
+<!-- Hero start--> 
+<Display size="display-mobile" stylingclasses="md:mb-20 mb-10 md:text-8xl text-primary-500" >Art - Music - Talks & Performances</Display>
+  <div style="display: flex; justify-content: flex-end ">
+    <img src="/sted-icon.svg" alt="sted" class=" w-6 h-6 md:w-6 md:h-6 mr-2 bounce-top" />
+    <Bodytext size="small-bold" stylingclasses="md:text-lg mb-2 md:mb-4" >Sjællands Odde Denmark</Bodytext>
+  </div>
+<!-- baggrundsbillede--> 
+  <div class="relative w-screen left-1/2 -translate-x-1/2 mb-5 md:mb-10">
+    <img src="/hero-forside.webp" alt="Billede af blomster med blur overlay" class="w-full h-[200px] md:h-[240px] object-cover block"
+    />
+    <div class="absolute inset-0 flex items-center justify-center">
+<!-- baggrundsbillede slut--> 
+<!-- Video--> 
+      <video
+        autoplay muted loop playsinline class="w-[40vw] max-w-[150px] aspect-square shadow-lg sm:w-[30vw] md:w-[25vw] object-cover"
+      > <!-- OBS: Boolean attributes - Det er attibutter der ikke behøver en værdi -->
+        <source src="/hero_video.mp4" type="video/mp4" /> Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+<!-- video slut -->
+  <div class="text-primary-50">
+    <Display size="display-mobile" stylingclasses="text-primary-50 mb-5 md:mb-10 md:text-8xl flex justify-center" >08.08 - 10.08</Display>
+  </div>
+  <div class="flex justify-center md:mb-28 mb-10" >
+    <a href="/program"><Button variant="outline-primary" size="mobile-regular md:desktop-regular" class="w-full md:w-1/2">Explore Program</Button></a>
+  </div>
+<!-- Hero sult --> 
 
-<MainLayout title="Førstegangsforældre">
-<div class="bg-gray-200 min-h-screen flex flex-col items-center justify-center">
-	<div class="grid grid-cols-2 gap-8 p-8">
-		<div class="flex flex-col items-center">
-			<h1 class="ml-24 text-black font-bold text-4xl mb-4 whitespace-nowrap">Alder igennem tiden for forstegangsforældre</h1>
-			<img src="/src/assets/images/chart.svg" class="w-full h-auto rounded-lg shadow-lg">
-		</div>
-		<article class="bg-white p-4 flex flex-col items-center justify-center rounded-lg shadow-lg max-w-md h-48 mt-32">
-			<h2 class="text-black font-bold text-2xl mb-4">Mænd blev først registreret som forstegangsforældre i 1986</h2>
-		</article>
-	</div>
-</div>
+<!-- start what is Lost Farm Festival -->
+<Heading size="medium" stylingclasses="md:text-5xl mb-5 md:mb-10">What is Lost Farm Festival</Heading>
+<section class="flex flex-col md:flex-row gap-4 md:gap-8 items-start mb-10 md:mb-28">
+  <div class="w-full md:w-1/2">
+      <img src="../index_img2.webp" alt="sløret billede af en skov" class="w-full h-auto" />
+  </div>
+  <div class="w-full md:w-1/2 flex flex-col max-w-[65ch] fadein">
+      <Bodytext size="small-regular" stylingclasses="md:text-lg mb-2 md:mb-4">
+        Lost Farm Festival is a three-day journey through art, music, and performance on the wild edge of Sjællands Odde.<br><br>
+        Artists are invited to experiment and create moments that can’t happen anywhere else. With the landscape, community, and artistic risk at the forefront.<br><br>
+        This is not Copenhagen or Aarhus—this is the cultural edge, Sjællands odde.
+      </Bodytext>
+       <div class="flex flex-col2 md:flex-row gap-4 md:mb-20 mb-10">
+            <a href="/tickets"><Button variant="filled-primary" size="mobile-regular md:desktop-regular" class="w-full md:w-1/2">Buy Ticket</Button></a>
+            <a href="/program"><Button variant="outline-primary" size="mobile-regular md:desktop-regular" class="w-full md:w-1/2">Explore Program</Button></a>
+      </div>
+  </div>
+</section>
+<!-- slut what is Lost Farm Festival -->
 </MainLayout>
 
+<script>
+  	import { inView } from "motion";
+ 
+ const FadeIn = document.querySelector(".fadein");
 
+ inView(FadeIn, () => {
+ FadeIn.classList.add("animate__animated", "animate__zoomIn");
+});
+</script>

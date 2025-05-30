@@ -1,0 +1,29 @@
+---
+import Button from "./Button.astro";
+import Heading from "./typography/Heading.astro";
+import Bodytext from "./typography/Bodytext.astro";
+const {title, description, price, buttonText,} = Astro.props;
+---
+
+<div class="p-10 h-70 md:h-90 bg-neutral-50/50 overflow-hidden">
+  <Heading size="small" stylingclasses="md:text-3xl md:mb-4 mb-2 text-primary-900">
+    {title}
+  </Heading>
+
+  <Bodytext size="small" stylingclasses="md:text-lg md:mb-4 mb-2 text-primary-900 max-w-[50ch]">
+    {description}
+  </Bodytext>  
+
+  <Bodytext size="small" stylingclasses="md:text-lg md:mb-4 mb-2 text-primary-900 font-bold">
+    {price}
+  </Bodytext>  
+
+  <a href="/billetformular">
+    <Button variant="filled-primary" size="mobile-regular md:desktop-regular">
+      {buttonText}
+    </Button>
+  </a>
+
+  <slot />
+</div> 
+
