@@ -1,0 +1,133 @@
+---
+import Heading from "./Heading.astro";
+import Bodytext from "./Bodytext.astro";
+import Button from "./Button.astro";
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-28">
+  <!-- Card Information -->
+  <div>
+    <Heading size="medium" stylingclasses="text-primary-500 mb-5 md:mb-10 md:text-3xl">
+      Card Information
+    </Heading>
+
+    <section class="mb-5 md:mb-10">
+      <div class="mb-5 md:mb-10">
+        <Bodytext size="small-regular" stylingclasses="text-primary-500 md:text-lg">
+          Card Number
+        </Bodytext>
+        <input
+          type="text"
+          placeholder="xxxx xxxx xxxx xxxx"
+          class="input input-bordered border-primary-600 bg-transparent rounded-none text-primary-400 placeholder-primary-50 font-lora w-full"
+        />
+      </div>
+      <div class="mb-5 md:mb-10">
+        <Bodytext size="small-regular" stylingclasses="text-primary-500 md:text-lg">
+          CVC
+        </Bodytext>
+        <input
+          type="text"
+          placeholder="xxx"
+          class="input input-bordered border-primary-600 bg-transparent rounded-none text-primary-400 placeholder-primary-50 font-lora w-full"
+        />
+      </div>
+    </section>
+
+    <div class="flex gap-2">
+      <input
+        type="checkbox"
+        class="checkbox border-2 border-primary-500 rounded-none bg-transparent checked:bg-primary-500 checked:border-transparent checked:text-primary-50"
+      />
+      <Bodytext size="xtra-small-regular" stylingclasses="text-primary-500 md:text-small">
+        I confirm that I understand and accept the payment for the ticket.
+      </Bodytext>
+    </div>
+  </div>
+
+  <!-- Order Summary -->
+  <div class="md:pl-6 mb-10 md:mb-28">
+    <section class="mb-10 md:mb-28">
+      <Heading size="xtra-small" stylingclasses="mb-5 md:mb-10">Order Summary</Heading>
+
+      <div class="space-y-6 text-primary-800 bg-white p-6 rounded-md shadow-md">
+        <!-- Tickets -->
+        <div class="space-y-2">
+          <Heading size="xtra-small" stylingclasses="text-primary-600">Tickets</Heading>
+          <p id="summary-step1-3days" class="text-sm">Loading...</p>
+          <p id="summary-step1-child" class="text-sm">Loading...</p>
+          <p id="summary-step1-total" class="font-medium text-sm text-primary-700">Subtotal: ...</p>
+        </div>
+
+        <!-- Add-ons -->
+        <div class="space-y-2">
+          <Heading size="xtra-small" stylingclasses="text-primary-600">Add-ons</Heading>
+          <div id="summary-step2-addons" class="text-sm">Loading...</div>
+          <p id="summary-step2-total" class="font-medium text-sm text-primary-700">Add-ons Total: ...</p>
+        </div>
+
+        <!-- Divider -->
+        <hr class="border-primary-200" />
+
+        <!-- Total -->
+        <div class="text-lg font-bold text-primary-900">
+          <Heading size="xtra-small" stylingclasses="text-primary-800">
+            Total: <span id="summary-total-combined" class="ml-1 font-bold">...</span>
+          </Heading>
+        </div>
+      </div>
+
+      <!-- Confirm Button -->
+      <div onclick="goToStep(5)" class="mt-6">
+        <Button variant="filled-primary" size="mobile-small">Confirm Order</Button>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- Script -->
+<script is:inline>
+  function loadFullSummary() {
+    console.log("🚀 loadFullSummary() kører!");
+
+    const count3Days = parseInt(localStorage.getItem("ticket-3days") ?? "0", 10);
+    const countChild = parseInt(localStorage.getItem("ticket-child") ?? "0", 10);
+    const totalStep1 = localStorage.getItem("ticket-total") ?? "0";
+    const addonsTotal = localStorage.getItem("addons-total") ?? "0";
+    const totalCombined = localStorage.getItem("total-combined") ?? "0";
+
+    document.getElementById("summary-step1-3days").textContent = `3 Days Ticket: ${count3Days} × 900 DKK`;
+    document.getElementById("summary-step1-child").textContent = `Child Ticket: ${countChild} × 400 DKK`;
+    document.getElementById("summary-step1-total").textContent = `Subtotal: ${totalStep1} DKK`;
+
+    const addOns = {
+      "ticket-bus": { label: "Bus Ticket", price: 300 },
+      "ticket-refund": { label: "Refund Option", price: 63 },
+      "ticket-reminder": { label: "Event Reminder", price: 15 },
+      "ticket-sms": { label: "SMS Ticket", price: 10 },
+      "ticket-camping": { label: "Camping", price: 0 },
+    };
+
+    let addOnHTML = "";
+    for (const key in addOns) {
+      const count = parseInt(localStorage.getItem(key) ?? "0", 10);
+      if (count > 0) {
+        addOnHTML += `<p>${addOns[key].label}: ${count} × ${addOns[key].price} DKK</p>`;
+      }
+    }
+
+    document.getElementById("summary-step2-addons").innerHTML =
+      addOnHTML || "<p class='text-sm italic text-gray-400'>No add-ons selected.</p>";
+    document.getElementById("summary-step2-total").textContent = `Add-ons Total: ${addonsTotal} DKK`;
+    document.getElementById("summary-total-combined").textContent = `Total: ${totalCombined} DKK`;
+  }
+
+  // Gør funktionen global hvis nødvendigt
+  window.loadFullSummary = loadFullSummary;
+
+  // Automatisk kørsel ved indlæsning
+  window.addEventListener("DOMContentLoaded", () => {
+    window.loadFullSummary();
+  });
+</script>
+

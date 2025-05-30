@@ -1,0 +1,111 @@
+---
+import Heading from "./Heading.astro"
+import Bodytext from "./Bodytext.astro"
+import Button from "./Button.astro"
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 mb-10 md:mb-28 gap-10 md:gap-28">
+  <div>
+    <Heading size="medium" stylingclasses="text-primary-500 pb-10 md:text-4xl">Contact Information</Heading>
+    <section class="mb-5 md:mb-10">
+      <div class="mb-5 md:mb-10">
+        <Bodytext size="small-regular" stylingclasses="text-primary-500 md:text-lg">Full name</Bodytext>
+        <input type="text" placeholder="Lars Larsen" class="input input-bordered border-primary-600 bg-transparent rounded-none text-primary-400 placeholder-primary-50 font-lora w-full"/>
+      </div>
+      <div class="mb-5 md:mb-10">
+        <Bodytext size="small-regular" stylingclasses="text-primary-500 md:text-lg">E-mail</Bodytext>
+        <input type="email" placeholder="lars@larsen.com" class="input input-bordered border-primary-600 bg-transparent rounded-none text-primary-400 placeholder-primary-50 font-lora w-full"/>
+      </div>
+      <div class="mb-5 md:mb-10">
+        <Bodytext size="small-regular" stylingclasses="text-primary-500 md:text-lg">Phone number</Bodytext>
+        <input type="tel" placeholder="+45 12 34 56 78" class="input input-bordered border-primary-600 bg-transparent rounded-none text-primary-400 placeholder-primary-50 font-lora w-full"/>
+      </div>
+      <div class="mb-5 md:mb-10">
+        <Bodytext size="small-regular" stylingclasses="text-primary-500 md:text-lg">Country</Bodytext>
+        <input type="text" placeholder="Denmark" class="input input-bordered border-primary-600 bg-transparent rounded-none text-primary-400 placeholder-primary-50 font-lora w-full"/>
+      </div>
+    </section>
+  </div>
+
+  <div class="md:pl-6 mb-10 md:mb-28">
+    <section class="mb-5 md:mb-10">
+      <Heading size="xtra-small" stylingclasses="mb-5 md:mb-10">Order Summary</Heading>
+
+      <div class="text-primary-50 font-lora pb-6 leading-relaxed">
+        <Heading size="xtra-small">Tickets</Heading>
+        <p id="summary-step1-3days">Loading...</p>
+        <p id="summary-step1-child">Loading...</p>
+        <p id="summary-step1-total">Loading...</p>
+
+        <Heading size="xtra-small">Add-ons</Heading>
+        <div id="summary-step2-addons" class="pb-2">Loading...</div>
+        <p id="summary-step2-total">Loading...</p>
+        <hr class="border-t-1 border-primary-50 mt-3 mb-3">
+
+        <Heading size="xtra-small" stylingclasses="text-primary-500">
+          Total
+          <span id="summary-total-combined" class="ml-2 font-bold">Amount: ...</span>
+        </Heading>
+      </div>
+
+      <div onclick="goToStep(4)">
+        <p><Button variant="filled-primary" size="mobile-small">Continue to Payment</Button></p>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script lang="ts" is:inline>
+  function loadFullSummary() {
+    console.log("🚀 loadFullSummary() kører!");
+
+    const count3Days = parseInt(localStorage.getItem("ticket-3days") ?? "0", 10);
+    const countChild = parseInt(localStorage.getItem("ticket-child") ?? "0", 10);
+    const totalStep1 = localStorage.getItem("ticket-total") ?? "0";
+    const addonsTotal = localStorage.getItem("addons-total") ?? "0";
+    const totalCombined = localStorage.getItem("total-combined") ?? "0";
+
+    console.log("Loaded from localStorage:");
+    console.log("ticket-3days:", count3Days);
+    console.log("ticket-child:", countChild);
+    console.log("ticket-total:", totalStep1);
+    console.log("addons-total:", addonsTotal);
+    console.log("total-combined:", totalCombined);
+
+    const el3days = document.getElementById("summary-step1-3days");
+    if (el3days) el3days.textContent = `3 Days Ticket: ${count3Days} × 900 DKK`;
+    const elChild = document.getElementById("summary-step1-child");
+    if (elChild) elChild.textContent = `Child Ticket: ${countChild} × 400 DKK`;
+    const elTotal = document.getElementById("summary-step1-total");
+    if (elTotal) elTotal.textContent = `Subtotal: ${totalStep1} DKK`;
+
+    const addOns = {
+      "ticket-bus": { label: "Bus Ticket", price: 300 },
+      "ticket-refund": { label: "Refund Option", price: 63 },
+      "ticket-reminder": { label: "Event Reminder", price: 15 },
+      "ticket-sms": { label: "SMS Ticket", price: 10 },
+      "ticket-camping": { label: "Camping", price: 0 },
+    };
+
+    let addOnHTML = "";
+    for (const key in addOns) {
+      const count = parseInt(localStorage.getItem(key) ?? "0", 10);
+      if (count > 0) {
+        addOnHTML += `<p>${addOns[key].label}: ${count} × ${addOns[key].price} DKK</p>`;
+      }
+    }
+
+    const addonsEl = document.getElementById("summary-step2-addons");
+    if (addonsEl) addonsEl.innerHTML = addOnHTML || "<p>No add-ons selected.</p>";
+    const addonsTotalEl = document.getElementById("summary-step2-total");
+    if (addonsTotalEl) addonsTotalEl.textContent = `Add-ons Total: ${addonsTotal} DKK`;
+    const totalCombinedEl = document.getElementById("summary-total-combined");
+    if (totalCombinedEl) totalCombinedEl.textContent = `Total: ${totalCombined} DKK`;
+  }
+
+  window.loadFullSummary = loadFullSummary;
+
+  window.addEventListener("DOMContentLoaded", () => {
+    loadFullSummary();
+  });
+</script>
