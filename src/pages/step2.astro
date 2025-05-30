@@ -50,7 +50,7 @@ const addOns = [
       <a href="/step5" class="step font-montserrat font-bold text-lg px-4 py-2 text-primary-500" data-step="5">5</a>
     </div>
     
-  <div class="grid grid-cols-1 md:grid-cols-2 md:gap-28">
+  <div class="grid grid-cols-1 md:grid-cols-2 md:gap-28 min-h-screen">
     <!-- Add-ons Form -->
     <div>
       <Heading size="medium" stylingclasses="text-primary-500 mb-5 md:mb-10 md:text-4xl">Additional Purchase</Heading>
@@ -73,7 +73,7 @@ const addOns = [
             <Bodytext size="xtra-small-regular">Add quantity</Bodytext>
             <div class="flex items-center">
               <button onclick={`adjustCount('${id}', -1)`} class="bg-primary-300 text-primary-50 hover:bg-primary-400 px-2 py-1 md:px-4 md:py-2">-</button>
-              <span id={`${id}-count`} class="bg-primary-50 px-3 py-1 md:px-6 md:py-2 font-bold">0</span>
+              <span id={`${id}-count`} class="bg-primary-50 text-neutral-950  px-3 py-1 md:px-6 md:py-2 font-bold">0</span>
               <button onclick={`adjustCount('${id}', 1)`} class="bg-primary-600 text-primary-50 hover:bg-primary-700 px-2 py-1 md:px-4 md:py-2">+</button>
             </div>
           </div>
@@ -81,7 +81,7 @@ const addOns = [
       ))}
     </div>
 
-    <!-- Summary -->
+    <!-- order Summary -->
     <div class="md:pl-6 mb-10 md:mb-28">
       <section class="mb-5 md:mb-10">
         <Heading size="xtra-small" stylingclasses="mb-5 md:mb-10">Order Summary</Heading>
