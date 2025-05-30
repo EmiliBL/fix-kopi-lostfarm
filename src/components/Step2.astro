@@ -3,124 +3,130 @@ import Heading from "./Heading.astro"
 import Bodytext from "./Bodytext.astro"
 import Button from "./Button.astro"
 ---
-
 <div class="grid grid-cols-1 md:grid-cols-2 md:gap-28">
-  <!-- Add-ons purchase -->
+  <!-- Billetformular -->
   <div>
-    <Heading size="medium" stylingclasses="text-primary-500 mb-5 md:mb-10 md:text-4xl">Additional Purchase</Heading>
+<Heading size="medium" stylingclasses="text-primary-500 mb-5 md:mb-10 md:text-4xl">Additional Purchase</Heading>
 
-    {/** Repeat sections for each addon **/}
-
-    <section class="mb-5 md:mb-10">
-      <div class="mb-5 md:mb-10">
-        <Heading size="small" stylingclasses="mb-5 md:mb-10 md:text-3xl">Bus Ticket – Copenhagen ⇄ Festival</Heading>
-        <Bodytext size="small-regular" stylingclasses="md:text-lg">
-          If you purchase tickets for additional guests, please indicate the total number here.
-        </Bodytext>
-      </div>
-
-      <div class="flex items-center gap-2 md:gap-4">
-        <Bodytext size="medium-regular">Price: </Bodytext>
-        <Heading size="xtra-xtra-small" stylingclasses="text-primary-600">300 DKK</Heading>
-        <div class="flex items-center ml-auto">
-          <button onclick="adjustCount('ticket-bus', -1)" class="bg-primary-300 text-primary-50 hover:bg-primary-400 px-2 py-1 md:px-4 md:py-2">-</button>
-          <span id="ticket-bus-count" class="bg-primary-50 px-3 py-1 md:px-6 md:py-2 font-bold">0</span>
-          <button onclick="adjustCount('ticket-bus', 1)" class="bg-primary-600 text-primary-50 hover:bg-primary-700 px-2 py-1 md:px-4 md:py-2">+</button>
-        </div>
-      </div>
-    </section>
-
-    <section class="mb-5 md:mb-10">
-      <div class="mb-5 md:mb-10">
-        <Heading size="small" stylingclasses="mb-5 md:mb-10 md:text-3xl">Add Refund</Heading>
-      </div>
-      <div class="flex items-center gap-2 md:gap-4">
-        <Bodytext size="medium-regular">Price: </Bodytext>
-        <Heading size="xtra-xtra-small" stylingclasses="text-primary-600">63 DKK</Heading>
-        <div class="flex items-center ml-auto">
-          <button onclick="adjustCount('ticket-refund', -1)" class="bg-primary-300 text-primary-50 hover:bg-primary-400 px-2 py-1 md:px-4 md:py-2">-</button>
-          <span id="ticket-refund-count" class="bg-primary-50 px-3 py-1 md:px-6 md:py-2 font-bold">0</span>
-          <button onclick="adjustCount('ticket-refund', 1)" class="bg-primary-600 text-primary-50 hover:bg-primary-700 px-2 py-1 md:px-4 md:py-2">+</button>
-        </div>
-      </div>
-    </section>
-
-    <section class="mb-5 md:mb-10">
-      <div class="mb-5 md:mb-10">
-        <Heading size="small" stylingclasses="mb-5 md:mb-10 md:text-3xl">Receive an event reminder</Heading>
-      </div>
-      <div class="flex items-center gap-2 md:gap-4">
-        <Bodytext size="medium-regular">Price: </Bodytext>
-        <Heading size="xtra-xtra-small" stylingclasses="text-primary-600">15 DKK</Heading>
-        <div class="flex items-center ml-auto">
-          <button onclick="adjustCount('ticket-reminder', -1)" class="bg-primary-300 text-primary-50 hover:bg-primary-400 px-2 py-1 md:px-4 md:py-2">-</button>
-          <span id="ticket-reminder-count" class="bg-primary-50 px-3 py-1 md:px-6 md:py-2 font-bold">0</span>
-          <button onclick="adjustCount('ticket-reminder', 1)" class="bg-primary-600 text-primary-50 hover:bg-primary-700 px-2 py-1 md:px-4 md:py-2">+</button>
-        </div>
-      </div>
-    </section>
-
-    <section class="mb-5 md:mb-10">
-      <div class="mb-5 md:mb-10">
-        <Heading size="small" stylingclasses="mb-5 md:mb-10 md:text-3xl">Get your ticket SMS</Heading>
-      </div>
-      <div class="flex items-center gap-2 md:gap-4">
-        <Bodytext size="medium-regular">Price: </Bodytext>
-        <Heading size="xtra-xtra-small" stylingclasses="text-primary-600">10 DKK</Heading>
-        <div class="flex items-center ml-auto">
-          <button onclick="adjustCount('ticket-sms', -1)" class="bg-primary-300 text-primary-50 hover:bg-primary-400 px-2 py-1 md:px-4 md:py-2">-</button>
-          <span id="ticket-sms-count" class="bg-primary-50 px-3 py-1 md:px-6 md:py-2 font-bold">0</span>
-          <button onclick="adjustCount('ticket-sms', 1)" class="bg-primary-600 text-primary-50 hover:bg-primary-700 px-2 py-1 md:px-4 md:py-2">+</button>
-        </div>
-      </div>
-    </section>
-
-    <section class="mb-5 md:mb-10">
-      <div class="mb-5 md:mb-10">
-        <Heading size="small" stylingclasses="mb-5 md:mb-10 md:text-3xl">Camping on site</Heading>
-        <Bodytext size="small-regular" stylingclasses="md:text-lg">
-          This information is for the festival organizers to give them an overview of the expected number of camping guests.
-        </Bodytext>
-      </div>
-      <div class="flex items-center gap-2 md:gap-4">
-        <Bodytext size="medium-regular">Price: </Bodytext>
-        <Heading size="xtra-xtra-small" stylingclasses="text-primary-600">0 DKK</Heading>
-        <div class="flex items-center ml-auto">
-          <button onclick="adjustCount('ticket-camping', -1)" class="bg-primary-300 text-primary-50 hover:bg-primary-400 px-2 py-1 md:px-4 md:py-2">-</button>
-          <span id="ticket-camping-count" class="bg-primary-50 px-3 py-1 md:px-6 md:py-2 font-bold">0</span>
-          <button onclick="adjustCount('ticket-camping', 1)" class="bg-primary-600 text-primary-50 hover:bg-primary-700 px-2 py-1 md:px-4 md:py-2">+</button>
-        </div>
-      </div>
-    </section>
+<!-- Bus ticket -->
+<section class="mb-5 md:mb-10">
+  <div class="mb-5 md:mb-10">  
+    <Heading size="small" stylingclasses="mb-5 md:mb-10 md:text-3xl">Bus Ticket – Copenhagen ⇄ Festival</Heading>
+    <Bodytext size="small-regular" stylingclasses="md:text-lg">
+      If you purchase tickets for additional guests, please indicate the total number here.
+    </Bodytext>
   </div>
+
+  <div class="flex items-center gap-2 md:gap-4">
+    <Bodytext size="medium-regular">Price: </Bodytext>
+    <Heading size="xtra-xtra-small" stylingclasses="text-primary-600">300 DKK</Heading>
+    
+    <div class="flex items-center ml-auto">
+      <button onclick="adjustCount('ticket-bus', -1)" class="bg-primary-300 text-primary-50 hover:bg-primary-400 px-2 py-1 md:px-4 md:py-2">-</button>
+      <span id="ticket-bus-count" class="bg-primary-50 px-3 py-1 md:px-6 md:py-2 font-bold">0</span>
+      <button onclick="adjustCount('ticket-bus', 1)" class="bg-primary-600 text-primary-50 hover:bg-primary-700 px-2 py-1 md:px-4 md:py-2">+</button>
+    </div>
+  </div>
+</section>
+
+<!-- Refund -->
+<section class="mb-5 md:mb-10">
+  <div class="mb-5 md:mb-10">  
+    <Heading size="small" stylingclasses="mb-5 md:mb-10 md:text-3xl">Add Refund</Heading>
+  </div>
+
+  <div class="flex items-center gap-2 md:gap-4">
+    <Bodytext size="medium-regular">Price: </Bodytext>
+    <Heading size="xtra-xtra-small" stylingclasses="text-primary-600">63 DKK</Heading>
+    
+    <div class="flex items-center ml-auto">
+      <button onclick="adjustCount('ticket-refund', -1)" class="bg-primary-300 text-primary-50 hover:bg-primary-400 px-2 py-1 md:px-4 md:py-2">-</button>
+      <span id="ticket-refund-count" class="bg-primary-50 px-3 py-1 md:px-6 md:py-2 font-bold">0</span>
+      <button onclick="adjustCount('ticket-refund', 1)" class="bg-primary-600 text-primary-50 hover:bg-primary-700 px-2 py-1 md:px-4 md:py-2">+</button>
+    </div>
+  </div>
+</section>
+
+<!-- Reminder -->
+<section class="mb-5 md:mb-10">
+  <div class="mb-5 md:mb-10">  
+    <Heading size="small" stylingclasses="mb-5 md:mb-10 md:text-3xl">Receive an event reminder</Heading>
+  </div>
+
+  <div class="flex items-center gap-2 md:gap-4">
+    <Bodytext size="medium-regular">Price: </Bodytext>
+    <Heading size="xtra-xtra-small" stylingclasses="text-primary-600">15 DKK</Heading>
+    
+    <div class="flex items-center ml-auto">
+      <button onclick="adjustCount('ticket-reminder', -1)" class="bg-primary-300 text-primary-50 hover:bg-primary-400 px-2 py-1 md:px-4 md:py-2">-</button>
+      <span id="ticket-reminder-count" class="bg-primary-50 px-3 py-1 md:px-6 md:py-2 font-bold">0</span>
+      <button onclick="adjustCount('ticket-reminder', 1)" class="bg-primary-600 text-primary-50 hover:bg-primary-700 px-2 py-1 md:px-4 md:py-2">+</button>
+    </div>
+  </div>
+</section>
+
+<!-- SMS Ticket -->
+<section class="mb-5 md:mb-10">
+  <div class="mb-5 md:mb-10">  
+    <Heading size="small" stylingclasses="mb-5 md:mb-10 md:text-3xl">Get your ticket SMS</Heading>
+  </div>
+  <div class="flex items-center gap-2 md:gap-4">
+    <Bodytext size="medium-regular">Price: </Bodytext>
+    <Heading size="xtra-xtra-small" stylingclasses="text-primary-600">10 DKK</Heading> 
+    <div class="flex items-center ml-auto">
+      <button onclick="adjustCount('ticket-sms', -1)" class="bg-primary-300 text-primary-50 hover:bg-primary-400 px-2 py-1 md:px-4 md:py-2">-</button>
+      <span id="ticket-sms-count" class="bg-primary-50 px-3 py-1 md:px-6 md:py-2 font-bold">0</span>
+      <button onclick="adjustCount('ticket-sms', 1)" class="bg-primary-600 text-primary-50 hover:bg-primary-700 px-2 py-1 md:px-4 md:py-2">+</button>
+    </div>
+  </div>
+</section>
+
+<!-- Camping -->
+<section class="mb-5 md:mb-10">
+  <div class="mb-5 md:mb-10">  
+    <Heading size="small" stylingclasses="mb-5 md:mb-10 md:text-3xl">Camping on site</Heading>
+    <Bodytext size="small-regular" stylingclasses="md:text-lg">
+      This information is for the festival organizers to give them an overview of the expected number of camping guests.
+    </Bodytext>
+  </div>
+  <div class="flex items-center gap-2 md:gap-4">
+    <Bodytext size="medium-regular">Price: </Bodytext>
+    <Heading size="xtra-xtra-small" stylingclasses="text-primary-600">0 DKK</Heading>
+    
+    <div class="flex items-center ml-auto">
+      <button onclick="adjustCount('ticket-camping', -1)" class="bg-primary-300 text-primary-50 hover:bg-primary-400 px-2 py-1 md:px-4 md:py-2">-</button>
+      <span id="ticket-camping-count" class="bg-primary-50 px-3 py-1 md:px-6 md:py-2 font-bold">0</span>
+      <button onclick="adjustCount('ticket-camping', 1)" class="bg-primary-600 text-primary-50 hover:bg-primary-700 px-2 py-1 md:px-4 md:py-2">+</button>
+    </div>
+  </div>
+</section>
+</div>
 
   <!-- Summary -->
   <div class="md:pl-6 mb-10 md:mb-28">
-    <section class="mb-5 md:mb-10">
-      <Heading size="xtra-small" stylingclasses="mb-5 md:mb-10">Order Summary</Heading>
+<section class="mb-5 md:mb-10">
+  <Heading size="xtra-small" stylingclasses="mb-5 md:mb-10">Order Summary</Heading>
 
-      <div class="space-y-2 text-primary-50 font-lora pb-6 leading-relaxed">
-        <p id="summary-step1-3days">Loading...</p>
-        <p id="summary-step1-child">Loading...</p>
+  <div class="space-y-2 text-primary-50 font-lora pb-6 leading-relaxed">
+    <p id="summary-step1-3days">Loading...</p>
+    <p id="summary-step1-child">Loading...</p>
 
-        <Heading size="xtra-xtra-small" stylingclasses="pb-2">Add-on:
-          <span id="addons-total-display" class="font-bold text-lg font-montserrat">0 DKK</span>
-        </Heading>
-        <hr class="border-t-1 border-primary-50" />
-        <Heading size="xtra-small" stylingclasses="text-primary-500">Total:
-          <span id="combined-total-display" class="font-bold text-xl font-montserrat">0 DKK</span>
-        </Heading>
-      </div>
+    <Heading size="xtra-xtra-small" stylingclasses="pb-2">Add-on:
+    <span id="addons-total-display" class="font-bold text-lg font-montserrat">0 DKK</span></Heading>
+    <hr class="border-t-1 border-primary-50">
+    <Heading size="xtra-small" stylingclasses="text-primary-500">Total:
+    <span id="combined-total-display" class="font-bold text-xl font-montserrat">0 DKK</span></Heading>
+  </div>
 
-      <div onclick="goToStep(3)">
-        <p><Button variant="filled-primary" size="mobile-small">Go to Checkout</Button></p>
-      </div>
-    </section>
+    <div onclick="goToStep(3)">
+      <p><Button variant="filled-primary" size="mobile-small">Go to Checkout</Button></p>
+    </div>
+</section>
+    <!-- Summary end -->
   </div>
 </div>
 
-<script is:inline>
-  // Define add-on prices
+<script>
   const addOnPrices = {
     "ticket-bus": 300,
     "ticket-refund": 63,
@@ -131,63 +137,51 @@ import Button from "./Button.astro"
 
   function adjustCount(id, delta) {
     const el = document.getElementById(`${id}-count`);
-    if (!el) return;
-    const current = parseInt(el.textContent || "0");
+    const current = parseInt(el.textContent);
     const newCount = Math.max(0, current + delta);
-    el.textContent = String(newCount);
+    el.textContent = newCount;
     updateStep2Summary();
   }
 
   function updateStep2Summary() {
-    const bus = parseInt(document.getElementById("ticket-bus-count")?.textContent || "0");
-    const refund = parseInt(document.getElementById("ticket-refund-count")?.textContent || "0");
-    const reminder = parseInt(document.getElementById("ticket-reminder-count")?.textContent || "0");
-    const sms = parseInt(document.getElementById("ticket-sms-count")?.textContent || "0");
-    const camping = parseInt(document.getElementById("ticket-camping-count")?.textContent || "0");
+    const bus = parseInt(document.getElementById("ticket-bus-count").textContent);
+    const refund = parseInt(document.getElementById("ticket-refund-count").textContent);
+    const reminder = parseInt(document.getElementById("ticket-reminder-count").textContent);
+    const sms = parseInt(document.getElementById("ticket-sms-count").textContent);
+    const camping = parseInt(document.getElementById("ticket-camping-count").textContent);
 
-    const addonsTotal =
-      bus * addOnPrices["ticket-bus"] +
-      refund * addOnPrices["ticket-refund"] +
-      reminder * addOnPrices["ticket-reminder"] +
-      sms * addOnPrices["ticket-sms"];
-    // camping price is zero, so no addition
+    const addonsTotal = (bus * addOnPrices["ticket-bus"]) +
+                        (refund * addOnPrices["ticket-refund"]) +
+                        (reminder * addOnPrices["ticket-reminder"]) +
+                        (sms * addOnPrices["ticket-sms"]);
 
-    const step1Total = parseInt(localStorage.getItem("ticket-total") || "0");
+    const step1Total = parseInt(localStorage.getItem("ticket-total")) || 0;
     const grandTotal = step1Total + addonsTotal;
 
-    // Save counts & totals in localStorage
-    localStorage.setItem("ticket-bus", String(bus));
-    localStorage.setItem("ticket-refund", String(refund));
-    localStorage.setItem("ticket-reminder", String(reminder));
-    localStorage.setItem("ticket-sms", String(sms));
-    localStorage.setItem("ticket-camping", String(camping));
-    localStorage.setItem("addons-total", String(addonsTotal));
-    localStorage.setItem("total-combined", String(grandTotal));
+    localStorage.setItem("ticket-bus", bus);
+    localStorage.setItem("ticket-refund", refund);
+    localStorage.setItem("ticket-reminder", reminder);
+    localStorage.setItem("ticket-sms", sms);
+    localStorage.setItem("ticket-camping", camping);
+    localStorage.setItem("addons-total", addonsTotal);
+    localStorage.setItem("total-combined", grandTotal);
 
-    // Update UI
-    const addonsTotalDisplay = document.getElementById("addons-total-display");
-    if (addonsTotalDisplay) addonsTotalDisplay.textContent = `${addonsTotal} DKK`;
-    const combinedTotalDisplay = document.getElementById("combined-total-display");
-    if (combinedTotalDisplay) combinedTotalDisplay.textContent = `${grandTotal} DKK`;
+    document.getElementById("addons-total-display").textContent = `${addonsTotal} DKK`;
+    document.getElementById("combined-total-display").textContent = `${grandTotal} DKK`;
   }
 
   function loadStep1Summary() {
-    const count3 = localStorage.getItem("ticket-3days") || "0";
-    const countChild = localStorage.getItem("ticket-child") || "0";
+    const count3 = localStorage.getItem("ticket-3days") || 0;
+    const countChild = localStorage.getItem("ticket-child") || 0;
+    const total = localStorage.getItem("ticket-total") || 0;
 
-    const summary3days = document.getElementById("summary-step1-3days");
-    if (summary3days) summary3days.textContent = `3 Days Ticket: ${count3} × 900 DKK`;
-    const summaryChild = document.getElementById("summary-step1-child");
-    if (summaryChild) summaryChild.textContent = `Child Ticket: ${countChild} × 400 DKK`;
-    // You can add subtotal if you want
+    document.getElementById("summary-step1-3days").textContent = `3 Days Ticket: ${count3} × 900 DKK`;
+    document.getElementById("summary-step1-child").textContent = `Child Ticket: ${countChild} × 400 DKK`;
+    document.getElementById("summary-step1-total").textContent = `Subtotal: ${total} DKK`;
   }
 
+  // Gør alle funktioner globale
   window.adjustCount = adjustCount;
   window.updateStep2Summary = updateStep2Summary;
   window.loadStep1Summary = loadStep1Summary;
-
-  window.addEventListener("DOMContentLoaded", () => {
-    loadStep1Summary();
-    updateStep2Summary();
-  });
 </script>

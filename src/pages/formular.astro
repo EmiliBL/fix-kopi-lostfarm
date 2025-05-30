@@ -1,104 +1,51 @@
 ---
-import Heading from "./Heading.astro"
-import Bodytext from "./Bodytext.astro"
-import Button from "./Button.astro"
+import MainLayout from "../layouts/MainLayout.astro";
+import Step1 from "../components/Step1.astro";
+import Step2 from "../components/Step2.astro";
+import Step3 from "../components/Step3.astro";
+import Step4 from "../components/Step4.astro";
+import Step5 from "../components/Step5.astro";
 ---
-<div class="grid grid-cols-1 md:grid-cols-2 md:gap-28">
-  <!-- Billetformular -->
-  <div>
-    <Heading size="medium" stylingclasses="text-primary-500 mb-5 md:mb-10 md:text-4xl">Festival Tickets</Heading>
+<MainLayout title="Billetformular">
+  <div id="ticket-form" class="p-4 max-w-9xl mx-auto">
 
-    <section class="mb-5 md:mb-10">
-      <div class="mb-5 md:mb-10">
-        <Heading size="small" stylingclasses="mb-2 md:mb-4 md:text-3xl">3 Days ticket</Heading>
-        <Bodytext size="small-regular" stylingclasses="md:text-lg">
-          Enjoy three unforgettable days of creativity and culture.
-        </Bodytext>
-      </div>
+    <!-- Progress bar -->
+    <div class="flex justify-between mb-10 text-sm font-bold cursor-pointer">
+      <span onclick="goToStep(1)" class="step font-montserrat font-bold text-lg px-4 py-2" data-step="1">1</span>
+      <div class="flex-1 h-0.5 mt-5 bg-primary-50 mx-2"></div>
+      <span onclick="goToStep(2)" class="step font-montserrat font-bold text-lg px-4 py-2" data-step="2">2</span>
+      <div class="flex-1 h-0.5 mt-5 bg-primary-50 mx-2"></div>
+      <span onclick="goToStep(3)" class="step font-montserrat font-bold text-lg px-4 py-2" data-step="3">3</span>
+      <div class="flex-1 h-0.5 mt-5 bg-primary-50 mx-2"></div>
+      <span onclick="goToStep(4)" class="step font-montserrat font-bold text-lg px-4 py-2" data-step="4">4</span>
+      <div class="flex-1 h-0.5 mt-5 bg-primary-50 mx-2"></div>
+      <span onclick="goToStep(5)" class="step font-montserrat font-bold text-lg px-4 py-2" data-step="5">5</span>
+    </div>
 
-      <div class="flex items-center gap-2 md:gap-4">
-        <Bodytext size="medium-regular">Price: </Bodytext>
-        <Heading size="xtra-xtra-small" stylingclasses="text-primary-600">900 DKK</Heading>
-      </div>
-
-      <div class="flex items-center justify-between w-full">
-        <Bodytext size="xtra-small-regular">Ticket fee 59 DKK</Bodytext>
-
-        <div class="flex items-center">
-          <button onclick="window.ticketForm.adjustCount('ticket-3days', -1)" class="bg-primary-300 text-primary-50 hover:bg-primary-400 px-2 py-1 md:px-4 md:py-2">-</button>
-          <span id="ticket-3days-count" class="bg-primary-50 px-3 py-1 md:px-6 md:py-2 font-bold">0</span>
-          <button onclick="window.ticketForm.adjustCount('ticket-3days', 1)" class="bg-primary-600 text-primary-50 hover:bg-primary-700 px-2 py-1 md:px-4 md:py-2">+</button>
-        </div>
-      </div>
-    </section>
-
-    <section class="mb-5 md:mb-10">
-      <div class="mb-5 md:mb-10">
-        <Heading size="small" stylingclasses="pb-2 md:text-3xl">Child Ticket 3 Year+</Heading>
-        <Bodytext size="small-regular" stylingclasses="md:text-lg">
-          Valid for children aged 3 to 13 when accompanied by an adult. Grants full access to all festival areas, events, and camping.
-        </Bodytext>
-      </div>
-
-      <div class="flex items-center gap-2 md:gap-4">
-        <Bodytext size="medium-regular">Price: </Bodytext>
-        <Heading size="xtra-xtra-small" stylingclasses="text-primary-600">400 DKK</Heading>
-      </div>
-
-      <div class="flex items-center justify-between w-full">
-        <Bodytext size="xtra-small-regular">Ticket fee 29 DKK</Bodytext>
-
-        <div class="flex items-center">
-          <button onclick="window.ticketForm.adjustCount('ticket-child', -1)" class="bg-primary-300 text-primary-50 hover:bg-primary-400 px-2 py-1 md:px-4 md:py-2">-</button>
-          <span id="ticket-child-count" class="bg-primary-50 px-3 py-1 md:px-6 md:py-2 font-bold">0</span>
-          <button onclick="window.ticketForm.adjustCount('ticket-child', 1)" class="bg-primary-600 text-primary-50 hover:bg-primary-700 px-2 py-1 md:px-4 md:py-2">+</button>
-        </div>
-      </div>
-    </section>
+    <!-- Step containers -->
+    <div id="step-1" class="step-content">
+      <Step1 client:load />
+    </div>
+    <div id="step-2" class="step-content hidden">
+      <Step2 client:load />
+    </div>
+    <div id="step-3" class="step-content hidden">
+      <Step3 client:load />
+    </div>
+    <div id="step-4" class="step-content hidden">
+      <Step4 />
+    </div>
+    <div id="step-5" class="step-content hidden">
+      <Step5 />
+    </div>
   </div>
 
-  <div class="md:pl-6 mb-10 md:mb-28">
-    <section class="mb-5 md:mb-10">
-      <Heading size="xtra-small" stylingclasses="mb-5 md:mb-10">Order Summary</Heading>
-
-      <div class="text-primary-50 font-lora pb-6 leading-relaxed">
-        <p id="summary-3days">3 Days Ticket: 0 × 900 DKK</p>
-        <p id="summary-child" class="mb-5 md:mb-10">Child Ticket: 0 × 400 DKK</p>
-        <hr class="border-t-1 border-primary-50 pb-2">
-        <p id="summary-total" class="font-bold text-xl font-montserrat text-primary-500">Total: 0 DKK</p>
-      </div>
-      <div onclick="window.ticketForm.goToStep(2)">
-        <p><Button variant="filled-primary" size="mobile-small">Add to Cart</Button></p>
-      </div>
-    </section>
-  </div>
-
-
-  <script lang="ts">
-  // Udvid Window interface til at indeholde ticketForm
-  declare global {
-    interface Window {
-      ticketForm: {
-        goToStep: (n: number) => void;
-        adjustCount: (id: string, delta: number) => void;
-        loadStep1Summary?: () => void;
-        updateStep2Summary?: () => void;
-        updateSummary?: () => void;
-        loadFullSummary?: () => void;
-      };
-    }
-  }
-
-  // Hvis window.ticketForm ikke findes, opret det som tomt objekt
-  window.ticketForm = window.ticketForm || {} as typeof window.ticketForm;
-
-  // Her sætter vi metoderne på window.ticketForm
-  (() => {
+  <script>
     let currentStep = 1;
-
-    function showStep(n: number) {
-      const steps = document.querySelectorAll('.step-content');
-      const stepIndicators = document.querySelectorAll('.step');
+    const steps = document.querySelectorAll('.step-content');
+    const stepIndicators = document.querySelectorAll('.step');
+  
+    function showStep(n) {
       steps.forEach((el, idx) => {
         el.classList.toggle('hidden', idx !== n - 1);
       });
@@ -107,128 +54,62 @@ import Button from "./Button.astro"
         el.classList.toggle('text-primary-50', idx !== n - 1);
       });
     }
+  
+    window.goToStep = function (n) {
+  currentStep = n;
+  showStep(currentStep);
 
-    function goToStep(n: number) {
-      currentStep = n;
-      showStep(currentStep);
-
-      if (n === 2 && typeof window.ticketForm.loadStep1Summary === "function") {
-        window.ticketForm.loadStep1Summary();
-      }
-      if (n === 2 && typeof window.ticketForm.updateStep2Summary === "function") {
-        window.ticketForm.updateStep2Summary();
-      }
-      if ((n === 3 || n === 4) && typeof window.ticketForm.loadFullSummary === "function") {
-        window.ticketForm.loadFullSummary();
-      }
+  // Step 2 og 3 henter tidligere data
+  if (n === 2) {
+    if (typeof window.loadStep1Summary === "function") {
+      console.log("Calling loadStep1Summary() for Step 2");
+      window.loadStep1Summary();
     }
-
-    function adjustCount(id: string, delta: number) {
-      const el = document.getElementById(`${id}-count`);
-      if (!el) return;
-
-      const current = parseInt(el.textContent || "0") || 0;
-      const updated = Math.max(0, current + delta);
-      el.textContent = updated.toString();
-
-      localStorage.setItem(id, updated.toString());
-
-      const ticket3 = parseInt(localStorage.getItem("ticket-3days") || "0");
-      const ticketChild = parseInt(localStorage.getItem("ticket-child") || "0");
-      const totalStep1 = (ticket3 * 900) + (ticketChild * 400);
-      localStorage.setItem("ticket-total", totalStep1.toString());
-
-      if (typeof window.ticketForm.updateSummary === "function") window.ticketForm.updateSummary();
-      if (typeof window.ticketForm.updateStep2Summary === "function") window.ticketForm.updateStep2Summary();
-    }
-
-    // Initial visning
-    document.addEventListener('DOMContentLoaded', () => {
-      showStep(currentStep);
-    });
-
-    window.ticketForm.goToStep = goToStep;
-    window.ticketForm.adjustCount = adjustCount;
-
-  })();
-</script>
-
-  <script lang="ts">
-  // Udvid Window interface til at indeholde ticketForm
-  declare global {
-    interface Window {
-      ticketForm: {
-        goToStep: (n: number) => void;
-        adjustCount: (id: string, delta: number) => void;
-        loadStep1Summary?: () => void;
-        updateStep2Summary?: () => void;
-        updateSummary?: () => void;
-        loadFullSummary?: () => void;
-      };
+    if (typeof window.updateStep2Summary === "function") {
+      window.updateStep2Summary();
     }
   }
 
-  // Hvis window.ticketForm ikke findes, opret det som tomt objekt
-  window.ticketForm = window.ticketForm || {} as typeof window.ticketForm;
-
-  // Her sætter vi metoderne på window.ticketForm
-  (() => {
-    let currentStep = 1;
-
-    function showStep(n: number) {
-      const steps = document.querySelectorAll('.step-content');
-      const stepIndicators = document.querySelectorAll('.step');
-      steps.forEach((el, idx) => {
-        el.classList.toggle('hidden', idx !== n - 1);
-      });
-      stepIndicators.forEach((el, idx) => {
-        el.classList.toggle('bg-primary-600', idx === n - 1);
-        el.classList.toggle('text-primary-50', idx !== n - 1);
-      });
+  // Step 3 henter data for opsummering
+  if (n === 3) {
+    console.log("🚀 Navigating to Step 3");
+    if (typeof window.loadFullSummary === "function") {
+      window.loadFullSummary();
     }
+  }
 
-    function goToStep(n: number) {
-      currentStep = n;
-      showStep(currentStep);
-
-      if (n === 2 && typeof window.ticketForm.loadStep1Summary === "function") {
-        window.ticketForm.loadStep1Summary();
-      }
-      if (n === 2 && typeof window.ticketForm.updateStep2Summary === "function") {
-        window.ticketForm.updateStep2Summary();
-      }
-      if ((n === 3 || n === 4) && typeof window.ticketForm.loadFullSummary === "function") {
-        window.ticketForm.loadFullSummary();
-      }
+  // Step 4 henter og viser opsummering
+  if (n === 4) {
+    console.log("🚀 Navigating to Step 4");
+    if (typeof window.loadFullSummary === "function") {
+      window.loadFullSummary(); // Opdater opsummering for step 4
     }
+  }
+};
 
-    function adjustCount(id: string, delta: number) {
+
+    window.adjustCount = function (id, delta) {
       const el = document.getElementById(`${id}-count`);
       if (!el) return;
-
-      const current = parseInt(el.textContent || "0") || 0;
+  
+      const current = parseInt(el.textContent) || 0;
       const updated = Math.max(0, current + delta);
-      el.textContent = updated.toString();
-
-      localStorage.setItem(id, updated.toString());
-
-      const ticket3 = parseInt(localStorage.getItem("ticket-3days") || "0");
-      const ticketChild = parseInt(localStorage.getItem("ticket-child") || "0");
+      el.textContent = updated;
+  
+      // Gem billetvalg direkte
+      localStorage.setItem(id, updated);
+  
+      // Opdater total for step 1, hvis relevant
+      const ticket3 = parseInt(localStorage.getItem("ticket-3days") || 0);
+      const ticketChild = parseInt(localStorage.getItem("ticket-child") || 0);
       const totalStep1 = (ticket3 * 900) + (ticketChild * 400);
-      localStorage.setItem("ticket-total", totalStep1.toString());
-
-      if (typeof window.ticketForm.updateSummary === "function") window.ticketForm.updateSummary();
-      if (typeof window.ticketForm.updateStep2Summary === "function") window.ticketForm.updateStep2Summary();
-    }
-
-    // Initial visning
-    document.addEventListener('DOMContentLoaded', () => {
-      showStep(currentStep);
-    });
-
-    window.ticketForm.goToStep = goToStep;
-    window.ticketForm.adjustCount = adjustCount;
-
-  })();
-</script>
-
+      localStorage.setItem("ticket-total", totalStep1);
+  
+      // Opdater step 1 og 2 opsummering hvis funktionerne findes
+      if (typeof window.updateSummary === "function") window.updateSummary();
+      if (typeof window.updateStep2Summary === "function") window.updateStep2Summary();
+    };
+  
+    showStep(currentStep);
+  </script>
+  

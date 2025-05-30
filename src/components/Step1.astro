@@ -3,12 +3,10 @@ import Heading from "./Heading.astro"
 import Bodytext from "./Bodytext.astro"
 import Button from "./Button.astro"
 ---
-
 <div class="grid grid-cols-1 md:grid-cols-2 md:gap-28">
   <!-- Billetformular -->
   <div>
     <Heading size="medium" stylingclasses="text-primary-500 mb-5 md:mb-10 md:text-4xl">Festival Tickets</Heading>
-
     <!-- 3 Day ticket start -->
     <section class="mb-5 md:mb-10">
       <div class="mb-5 md:mb-10">
@@ -17,12 +15,15 @@ import Button from "./Button.astro"
           Enjoy three unforgettable days of creativity and culture.
         </Bodytext>
       </div>
+      <!-- pris -->
       <div class="flex items-center gap-2 md:gap-4">
         <Bodytext size="medium-regular">Price: </Bodytext>
         <Heading size="xtra-xtra-small" stylingclasses="text-primary-600">900 DKK</Heading>
       </div>
+      <!-- ticket fee + ikcon -->
       <div class="flex items-center justify-between w-full">
         <Bodytext size="xtra-small-regular">Ticket fee 59 DKK</Bodytext>
+
         <div class="flex items-center">
           <button onclick="adjustCount('ticket-3days', -1)" class="bg-primary-300 text-primary-50 hover:bg-primary-400 px-2 py-1 md:px-4 md:py-2">-</button>
           <span id="ticket-3days-count" class="bg-primary-50 px-3 py-1 md:px-6 md:py-2 font-bold">0</span>
@@ -56,7 +57,7 @@ import Button from "./Button.astro"
     <!-- Child ticket slut -->
   </div>
 
-  <!-- Summary start -->
+ <!-- Summary start -->
   <div class="md:pl-6 mb-10 md:mb-28">
     <section class="mb-5 md:mb-10">
       <Heading size="xtra-small" stylingclasses="mb-5 md:mb-10">Order Summary</Heading>
@@ -64,68 +65,62 @@ import Button from "./Button.astro"
       <div class="text-primary-50 font-lora pb-6 leading-relaxed">
         <p id="summary-3days">3 Days Ticket: 0 × 900 DKK</p>
         <p id="summary-child" class="mb-5 md:mb-10">Child Ticket: 0 × 400 DKK</p>
-        <hr class="border-t-1 border-primary-50 pb-2" />
+        <hr class="border-t-1 border-primary-50 pb-2">
         <p id="summary-total" class="font-bold text-xl font-montserrat text-primary-500">Total: 0 DKK</p>
       </div>
       <div onclick="goToStep(2)">
-        <p><Button variant="filled-primary" size="mobile-small">Add to Cart</Button></p>
+        <p><Button variant="filled-primary" size="mobile-small">Add to Card </Button></p>
       </div>
     </section>
     <!-- Summary end -->
   </div>
 </div>
 
-<script is:inline>
-  // Use plain JavaScript instead of TypeScript
 
+<script>
   const ticketPrices = {
     "ticket-3days": 900,
-    "ticket-child": 400,
+    "ticket-child": 400
   };
 
   function adjustCount(id, delta) {
     const el = document.getElementById(`${id}-count`);
-    if (!el) return;
-    const current = parseInt(el.textContent || "0");
+    const current = parseInt(el.textContent);
     const newCount = Math.max(0, current + delta);
-    el.textContent = newCount.toString();
+    el.textContent = newCount;
     updateSummary();
   }
 
   function updateSummary() {
-    const count3Days = parseInt(document.getElementById("ticket-3days-count")?.textContent || "0");
-    const countChild = parseInt(document.getElementById("ticket-child-count")?.textContent || "0");
+  const count3Days = parseInt(document.getElementById("ticket-3days-count").textContent);
+  const countChild = parseInt(document.getElementById("ticket-child-count").textContent);
 
-    const total3Days = count3Days * ticketPrices["ticket-3days"];
-    const totalChild = countChild * ticketPrices["ticket-child"];
-    const total = total3Days + totalChild;
+  const total3Days = count3Days * ticketPrices["ticket-3days"];
+  const totalChild = countChild * ticketPrices["ticket-child"];
+  const total = total3Days + totalChild;
 
-    const summary3 = document.getElementById("summary-3days");
-    const summaryChild = document.getElementById("summary-child");
-    const summaryTotal = document.getElementById("summary-total");
+  document.getElementById("summary-3days").textContent = `3 Days Ticket: ${count3Days} × 900 DKK`;
+  document.getElementById("summary-child").textContent = `Child Ticket: ${countChild} × 400 DKK`;
+  document.getElementById("summary-total").textContent = `Total: ${total} DKK`;
 
-    if (summary3) summary3.textContent = `3 Days Ticket: ${count3Days} × 900 DKK`;
-    if (summaryChild) summaryChild.textContent = `Child Ticket: ${countChild} × 400 DKK`;
-    if (summaryTotal) summaryTotal.textContent = `Total: ${total} DKK`;
+  // Gem data i localStorage
+  localStorage.setItem("ticket-3days", count3Days);
+  localStorage.setItem("ticket-child", countChild);
+  localStorage.setItem("ticket-total", total);
 
-    // Save to localStorage
-    localStorage.setItem("ticket-3days", count3Days.toString());
-    localStorage.setItem("ticket-child", countChild.toString());
-    localStorage.setItem("ticket-total", total.toString());
-
-    // Optional debug logs:
-    // console.log("Saved:", { count3Days, countChild, total });
-  }
+  // Log data for debugging
+  console.log("Saved to localStorage:");
+  console.log("ticket-3days:", localStorage.getItem("ticket-3days"));
+  console.log("ticket-child:", localStorage.getItem("ticket-child"));
+  console.log("ticket-total:", localStorage.getItem("ticket-total"));
+}
 
   function loadSavedCounts() {
-    const saved3 = parseInt(localStorage.getItem("ticket-3days") || "0");
-    const savedChild = parseInt(localStorage.getItem("ticket-child") || "0");
+    const saved3 = parseInt(localStorage.getItem("ticket-3days")) || 0;
+    const savedChild = parseInt(localStorage.getItem("ticket-child")) || 0;
 
-    const el3 = document.getElementById("ticket-3days-count");
-    const elChild = document.getElementById("ticket-child-count");
-
-    if (el3) el3.textContent = saved3.toString();
-    if (elChild) elChild.textContent = savedChild.toString();
+    document.getElementById("ticket-3days-count").textContent = saved3;
+    document.getElementById("ticket-child-count").textContent = savedChild;
   }
 
   window.addEventListener("DOMContentLoaded", () => {
@@ -133,7 +128,6 @@ import Button from "./Button.astro"
     updateSummary();
   });
 
-  // Expose globally for inline handlers
-  window.adjustCount = adjustCount;
   window.updateSummary = updateSummary;
+  window.adjustCount = adjustCount;
 </script>
