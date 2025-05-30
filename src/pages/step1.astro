@@ -1,29 +1,33 @@
 ---
-import Heading from "./Heading.astro"
-import Bodytext from "./Bodytext.astro"
-import Button from "./Button.astro"
+import Heading from '../components/Heading.astro';
+import Bodytext from '../components/Bodytext.astro';
+import Button from '../components/Button.astro';
+import MainLayout from '../layouts/MainLayout.astro';
 ---
+
+<MainLayout> 
 <div class="grid grid-cols-1 md:grid-cols-2 md:gap-28">
   <!-- Billetformular -->
   <div>
     <Heading size="medium" stylingclasses="text-primary-500 mb-5 md:mb-10 md:text-4xl">Festival Tickets</Heading>
-    <!-- 3 Day ticket start -->
+
+    <!-- 3 Day Ticket -->
     <section class="mb-5 md:mb-10">
       <div class="mb-5 md:mb-10">
         <Heading size="small" stylingclasses="mb-2 md:mb-4 md:text-3xl">3 Days ticket</Heading>
         <Bodytext size="small-regular" stylingclasses="md:text-lg">
           Enjoy three unforgettable days of creativity and culture.
         </Bodytext>
+         
       </div>
-      <!-- pris -->
+
       <div class="flex items-center gap-2 md:gap-4">
-        <Bodytext size="medium-regular">Price: </Bodytext>
+        <Bodytext size="medium-regular">Price:</Bodytext>
         <Heading size="xtra-xtra-small" stylingclasses="text-primary-600">900 DKK</Heading>
       </div>
-      <!-- ticket fee + ikcon -->
+
       <div class="flex items-center justify-between w-full">
         <Bodytext size="xtra-small-regular">Ticket fee 59 DKK</Bodytext>
-
         <div class="flex items-center">
           <button onclick="adjustCount('ticket-3days', -1)" class="bg-primary-300 text-primary-50 hover:bg-primary-400 px-2 py-1 md:px-4 md:py-2">-</button>
           <span id="ticket-3days-count" class="bg-primary-50 px-3 py-1 md:px-6 md:py-2 font-bold">0</span>
@@ -31,9 +35,8 @@ import Button from "./Button.astro"
         </div>
       </div>
     </section>
-    <!-- 3 Day ticket end -->
 
-    <!-- Child ticket start -->
+    <!-- Child Ticket -->
     <section class="mb-5 md:mb-10">
       <div class="mb-5 md:mb-10">
         <Heading size="small" stylingclasses="pb-2 md:text-3xl">Child Ticket 3 Year+</Heading>
@@ -41,10 +44,12 @@ import Button from "./Button.astro"
           Valid for children aged 3 to 13 when accompanied by an adult. Grants full access to all festival areas, events, and camping.
         </Bodytext>
       </div>
+
       <div class="flex items-center gap-2 md:gap-4">
-        <Bodytext size="medium-regular">Price: </Bodytext>
+        <Bodytext size="medium-regular">Price:</Bodytext>
         <Heading size="xtra-xtra-small" stylingclasses="text-primary-600">400 DKK</Heading>
       </div>
+
       <div class="flex items-center justify-between w-full">
         <Bodytext size="xtra-small-regular">Ticket fee 29 DKK</Bodytext>
         <div class="flex items-center">
@@ -54,10 +59,9 @@ import Button from "./Button.astro"
         </div>
       </div>
     </section>
-    <!-- Child ticket slut -->
   </div>
 
- <!-- Summary start -->
+  <!-- Summary -->
   <div class="md:pl-6 mb-10 md:mb-28">
     <section class="mb-5 md:mb-10">
       <Heading size="xtra-small" stylingclasses="mb-5 md:mb-10">Order Summary</Heading>
@@ -65,22 +69,23 @@ import Button from "./Button.astro"
       <div class="text-primary-50 font-lora pb-6 leading-relaxed">
         <p id="summary-3days">3 Days Ticket: 0 × 900 DKK</p>
         <p id="summary-child" class="mb-5 md:mb-10">Child Ticket: 0 × 400 DKK</p>
-        <hr class="border-t-1 border-primary-50 pb-2">
+        <hr class="border-t border-primary-50 pb-2" />
         <p id="summary-total" class="font-bold text-xl font-montserrat text-primary-500">Total: 0 DKK</p>
       </div>
-      <div onclick="goToStep(2)">
-        <p><Button variant="filled-primary" size="mobile-small">Add to Card </Button></p>
-      </div>
+
+      <a href="/step2">
+        <Button variant="filled-primary" size="mobile-small">Add to Cart</Button>
+      </a>
     </section>
-    <!-- Summary end -->
   </div>
 </div>
+</MainLayout>
 
-
-<script>
+<!-- JavaScript -->
+<script is:inline>
   const ticketPrices = {
     "ticket-3days": 900,
-    "ticket-child": 400
+    "ticket-child": 400,
   };
 
   function adjustCount(id, delta) {
@@ -92,28 +97,18 @@ import Button from "./Button.astro"
   }
 
   function updateSummary() {
-  const count3Days = parseInt(document.getElementById("ticket-3days-count").textContent);
-  const countChild = parseInt(document.getElementById("ticket-child-count").textContent);
+    const count3 = parseInt(document.getElementById("ticket-3days-count").textContent);
+    const countChild = parseInt(document.getElementById("ticket-child-count").textContent);
+    const total = count3 * ticketPrices["ticket-3days"] + countChild * ticketPrices["ticket-child"];
 
-  const total3Days = count3Days * ticketPrices["ticket-3days"];
-  const totalChild = countChild * ticketPrices["ticket-child"];
-  const total = total3Days + totalChild;
+    document.getElementById("summary-3days").textContent = `3 Days Ticket: ${count3} × 900 DKK`;
+    document.getElementById("summary-child").textContent = `Child Ticket: ${countChild} × 400 DKK`;
+    document.getElementById("summary-total").textContent = `Total: ${total} DKK`;
 
-  document.getElementById("summary-3days").textContent = `3 Days Ticket: ${count3Days} × 900 DKK`;
-  document.getElementById("summary-child").textContent = `Child Ticket: ${countChild} × 400 DKK`;
-  document.getElementById("summary-total").textContent = `Total: ${total} DKK`;
-
-  // Gem data i localStorage
-  localStorage.setItem("ticket-3days", count3Days);
-  localStorage.setItem("ticket-child", countChild);
-  localStorage.setItem("ticket-total", total);
-
-  // Log data for debugging
-  console.log("Saved to localStorage:");
-  console.log("ticket-3days:", localStorage.getItem("ticket-3days"));
-  console.log("ticket-child:", localStorage.getItem("ticket-child"));
-  console.log("ticket-total:", localStorage.getItem("ticket-total"));
-}
+    localStorage.setItem("ticket-3days", count3);
+    localStorage.setItem("ticket-child", countChild);
+    localStorage.setItem("ticket-total", total);
+  }
 
   function loadSavedCounts() {
     const saved3 = parseInt(localStorage.getItem("ticket-3days")) || 0;
@@ -128,6 +123,6 @@ import Button from "./Button.astro"
     updateSummary();
   });
 
-  window.updateSummary = updateSummary;
   window.adjustCount = adjustCount;
+  window.updateSummary = updateSummary;
 </script>

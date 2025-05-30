@@ -1,0 +1,151 @@
+---
+import Heading from "../components/Heading.astro";
+import Bodytext from "../components/Bodytext.astro";
+import Button from "../components/Button.astro";
+import MainLayout from "../layouts/MainLayout.astro";
+
+const addOns = [
+  {
+    id: "ticket-bus",
+    title: "Bus Ticket – Copenhagen ⇄ Festival",
+    description: "If you purchase tickets for additional guests, please indicate the total number here.",
+    price: 300,
+  },
+  {
+    id: "ticket-refund",
+    title: "Add Refund",
+    price: 63,
+  },
+  {
+    id: "ticket-reminder",
+    title: "Receive an event reminder",
+    price: 15,
+  },
+  {
+    id: "ticket-sms",
+    title: "Get your ticket SMS",
+    price: 10,
+  },
+  {
+    id: "ticket-camping",
+    title: "Camping on site",
+    description: "This information is for the festival organizers to give them an overview of the expected number of camping guests.",
+    price: 0,
+  },
+];
+---
+
+<MainLayout>
+  <div class="grid grid-cols-1 md:grid-cols-2 md:gap-28">
+    <!-- Add-ons Form -->
+    <div>
+      <Heading size="medium" stylingclasses="text-primary-500 mb-5 md:mb-10 md:text-4xl">Additional Purchase</Heading>
+
+      {addOns.map(({ id, title, description, price }) => (
+        <section class="mb-5 md:mb-10" key={id}>
+          <div class="mb-5 md:mb-10">
+            <Heading size="small" stylingclasses="mb-2 md:mb-4 md:text-3xl">{title}</Heading>
+            {description && (
+              <Bodytext size="small-regular" stylingclasses="md:text-lg">{description}</Bodytext>
+            )}
+          </div>
+
+          <div class="flex items-center gap-2 md:gap-4">
+            <Bodytext size="medium-regular">Price:</Bodytext>
+            <Heading size="xtra-xtra-small" stylingclasses="text-primary-600">{price} DKK</Heading>
+          </div>
+
+          <div class="flex items-center justify-between w-full mt-2">
+            <Bodytext size="xtra-small-regular">Add quantity</Bodytext>
+            <div class="flex items-center">
+              <button onclick={`adjustCount('${id}', -1)`} class="bg-primary-300 text-primary-50 hover:bg-primary-400 px-2 py-1 md:px-4 md:py-2">-</button>
+              <span id={`${id}-count`} class="bg-primary-50 px-3 py-1 md:px-6 md:py-2 font-bold">0</span>
+              <button onclick={`adjustCount('${id}', 1)`} class="bg-primary-600 text-primary-50 hover:bg-primary-700 px-2 py-1 md:px-4 md:py-2">+</button>
+            </div>
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <!-- Summary -->
+    <div class="md:pl-6 mb-10 md:mb-28">
+      <section class="mb-5 md:mb-10">
+        <Heading size="xtra-small" stylingclasses="mb-5 md:mb-10">Order Summary</Heading>
+
+        <div class="text-primary-50 font-lora pb-6 leading-relaxed">
+          <p id="summary-step1-3days">Loading...</p>
+          <p id="summary-step1-child">Loading...</p>
+          <p id="summary-step1-total">Subtotal: 0 DKK</p>
+
+          <hr class="border-t border-primary-50 my-4" />
+          <p class="pb-2 font-montserrat text-lg">Add-ons: <span id="addons-total-display" class="font-bold">0 DKK</span></p>
+          <p class="font-montserrat text-xl font-bold text-primary-500">Total: <span id="combined-total-display">0 DKK</span></p>
+        </div>
+
+        <a href="/step3">
+          <Button variant="filled-primary" size="mobile-small">Go to Checkout</Button>
+        </a>
+      </section>
+    </div>
+  </div>
+</MainLayout>
+
+<!-- JavaScript -->
+<script is:inline>
+  const addOnPrices = {
+    "ticket-bus": 300,
+    "ticket-refund": 63,
+    "ticket-reminder": 15,
+    "ticket-sms": 10,
+    "ticket-camping": 0,
+  };
+
+  function adjustCount(id, delta) {
+    const el = document.getElementById(id + "-count");
+    const current = parseInt(el.textContent);
+    const newCount = Math.max(0, current + delta);
+    el.textContent = newCount;
+    updateStep2Summary();
+  }
+
+  function updateStep2Summary() {
+    const counts = Object.keys(addOnPrices).reduce((acc, key) => {
+      acc[key] = parseInt(document.getElementById(key + "-count").textContent);
+      return acc;
+    }, {});
+
+    const addonsTotal = Object.entries(counts)
+      .reduce((sum, [key, count]) => sum + count * addOnPrices[key], 0);
+
+    const step1Total = parseInt(localStorage.getItem("ticket-total")) || 0;
+    const grandTotal = addonsTotal + step1Total;
+
+    for (const key in counts) {
+      localStorage.setItem(key, counts[key]);
+    }
+
+    localStorage.setItem("addons-total", addonsTotal);
+    localStorage.setItem("total-combined", grandTotal);
+
+    document.getElementById("addons-total-display").textContent = addonsTotal + " DKK";
+    document.getElementById("combined-total-display").textContent = grandTotal + " DKK";
+  }
+
+  function loadStep1Summary() {
+    const count3 = localStorage.getItem("ticket-3days") || "0";
+    const countChild = localStorage.getItem("ticket-child") || "0";
+    const total = localStorage.getItem("ticket-total") || "0";
+
+    document.getElementById("summary-step1-3days").textContent = `3 Days Ticket: ${count3} × 900 DKK`;
+    document.getElementById("summary-step1-child").textContent = `Child Ticket: ${countChild} × 400 DKK`;
+    document.getElementById("summary-step1-total").textContent = `Subtotal: ${total} DKK`;
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    loadStep1Summary();
+    updateStep2Summary();
+  });
+
+  window.adjustCount = adjustCount;
+  window.updateStep2Summary = updateStep2Summary;
+</script>

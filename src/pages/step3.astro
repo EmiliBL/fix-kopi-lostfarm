@@ -1,0 +1,96 @@
+---
+import Heading from '../components/Heading.astro';
+import Bodytext from '../components/Bodytext.astro';
+import Button from '../components/Button.astro';
+import MainLayout from '../layouts/MainLayout.astro';
+---
+<MainLayout>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-28 mb-10 md:mb-28">
+    <!-- Kontaktformular -->
+    <div>
+      <Heading size="medium" stylingclasses="text-primary-500 pb-10 md:text-4xl">Contact Information</Heading>
+      <section class="space-y-8 md:space-y-10">
+        <div>
+          <Bodytext size="small-regular" stylingclasses="text-primary-500 md:text-lg">Full name</Bodytext>
+          <input type="text" placeholder="Lars Larsen" class="input input-bordered border-primary-600 bg-transparent rounded-none text-primary-400 placeholder-primary-50 font-lora w-full"/>
+        </div>
+        <div>
+          <Bodytext size="small-regular" stylingclasses="text-primary-500 md:text-lg">E-mail</Bodytext>
+          <input type="email" placeholder="lars@larsen.com" class="input input-bordered border-primary-600 bg-transparent rounded-none text-primary-400 placeholder-primary-50 font-lora w-full"/>
+        </div>
+        <div>
+          <Bodytext size="small-regular" stylingclasses="text-primary-500 md:text-lg">Phone number</Bodytext>
+          <input type="tel" placeholder="+45 12 34 56 78" class="input input-bordered border-primary-600 bg-transparent rounded-none text-primary-400 placeholder-primary-50 font-lora w-full"/>
+        </div>
+        <div>
+          <Bodytext size="small-regular" stylingclasses="text-primary-500 md:text-lg">Country</Bodytext>
+          <input type="text" placeholder="Denmark" class="input input-bordered border-primary-600 bg-transparent rounded-none text-primary-400 placeholder-primary-50 font-lora w-full"/>
+        </div>
+      </section>
+    </div>
+
+    <!-- Opsummering -->
+    <div class="md:pl-6">
+      <section>
+        <Heading size="xtra-small" stylingclasses="mb-5 md:mb-10">Order Summary</Heading>
+
+        <div class="text-primary-50 font-lora pb-6 leading-relaxed">
+          <Heading size="xtra-small">Tickets</Heading>
+          <p id="summary-step1-3days">Loading...</p>
+          <p id="summary-step1-child">Loading...</p>
+          <p id="summary-step1-total">Loading...</p>
+
+          <Heading size="xtra-small" stylingclasses="pt-4">Add-ons</Heading>
+          <div class="pb-2" id="summary-step2-addons">Loading...</div>
+          <p id="summary-step2-total" class="pb-4">Loading...</p>
+
+          <hr class="border-t border-primary-50 mb-4" />
+
+          <Heading size="xtra-small" stylingclasses="text-primary-500">
+            Total <span id="summary-total-combined">Amount: ...</span>
+          </Heading>
+        </div>
+
+        <ahref="/step4">
+          <Button variant="filled-primary" size="mobile-small">Continue to Payment</Button>
+    </a>
+      </section>
+    </div>
+  </div>
+</MainLayout>
+
+<script is:inline>
+  function loadFullSummary() {
+    const count3Days = parseInt(localStorage.getItem("ticket-3days") ?? "0", 10);
+    const countChild = parseInt(localStorage.getItem("ticket-child") ?? "0", 10);
+    const totalStep1 = localStorage.getItem("ticket-total") ?? "0";
+    const addonsTotal = localStorage.getItem("addons-total") ?? "0";
+    const totalCombined = localStorage.getItem("total-combined") ?? "0";
+
+    document.getElementById("summary-step1-3days").textContent = `3 Days Ticket: ${count3Days} × 900 DKK`;
+    document.getElementById("summary-step1-child").textContent = `Child Ticket: ${countChild} × 400 DKK`;
+    document.getElementById("summary-step1-total").textContent = `Subtotal: ${totalStep1} DKK`;
+
+    const addOns = {
+      "ticket-bus": { label: "Bus Ticket", price: 300 },
+      "ticket-refund": { label: "Refund Option", price: 63 },
+      "ticket-reminder": { label: "Event Reminder", price: 15 },
+      "ticket-sms": { label: "SMS Ticket", price: 10 },
+      "ticket-camping": { label: "Camping", price: 0 },
+    };
+
+    let addOnHTML = "";
+    for (const key in addOns) {
+      const count = parseInt(localStorage.getItem(key) ?? "0", 10);
+      if (count > 0) {
+        addOnHTML += `<p>${addOns[key].label}: ${count} × ${addOns[key].price} DKK</p>`;
+      }
+    }
+
+    document.getElementById("summary-step2-addons").innerHTML = addOnHTML || "<p>No add-ons selected.</p>";
+    document.getElementById("summary-step2-total").textContent = `Add-ons Total: ${addonsTotal} DKK`;
+    document.getElementById("summary-total-combined").textContent = `Total: ${totalCombined} DKK`;
+  }
+
+  window.addEventListener("DOMContentLoaded", loadFullSummary);
+</script>
