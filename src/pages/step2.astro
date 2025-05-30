@@ -42,7 +42,7 @@ const addOns = [
       <Heading size="medium" stylingclasses="text-primary-500 mb-5 md:mb-10 md:text-4xl">Additional Purchase</Heading>
 
       {addOns.map(({ id, title, description, price }) => (
-        <section class="mb-5 md:mb-10" key={id}>
+        <section class="mb-5 md:mb-10">
           <div class="mb-5 md:mb-10">
             <Heading size="small" stylingclasses="mb-2 md:mb-4 md:text-3xl">{title}</Heading>
             {description && (

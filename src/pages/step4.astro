@@ -65,9 +65,9 @@ import MainLayout from "../layouts/MainLayout.astro";
           </Heading>
         </div>
 
-        <div onclick="goToStep(5)">
-          <Button variant="filled-primary" size="mobile-small">Confirm Order</Button>
-        </div>
+    <a href="/step5">
+      <Button variant="filled-primary" size="mobile-small">Confirm Order</Button>
+    </a>
       </section>
     </div>
   </div>
@@ -106,5 +106,5 @@ import MainLayout from "../layouts/MainLayout.astro";
     document.getElementById("summary-total-combined").textContent = `Total: ${totalCombined} DKK`;
   }
 
-  window.addEventListener('DOMContent
+  window.addEventListener('DOMContentLoaded', loadFullSummary);
 </script>
