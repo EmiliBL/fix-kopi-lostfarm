@@ -1,0 +1,23 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Button from '../components/Button.astro';
+import Link from '../components/Link.astro';
+import { Image } from 'astro:assets';
+
+---
+
+<MainLayout title="Førstegangsforældre">
+<div class="bg-gray-200 min-h-screen flex flex-col items-center justify-center">
+	<div class="grid grid-cols-2 gap-8 p-8">
+		<div class="flex flex-col items-center">
+			<h1 class="ml-24 text-black font-bold text-4xl mb-4 whitespace-nowrap">Alder igennem tiden for forstegangsforældre</h1>
+			<img src="/src/assets/images/chart.svg" class="w-full h-auto rounded-lg shadow-lg">
+		</div>
+		<article class="bg-white p-4 flex flex-col items-center justify-center rounded-lg shadow-lg max-w-md h-48 mt-32">
+			<h2 class="text-black font-bold text-2xl mb-4">Mænd blev først registreret som forstegangsforældre i 1986</h2>
+		</article>
+	</div>
+</div>
+</MainLayout>
+
+

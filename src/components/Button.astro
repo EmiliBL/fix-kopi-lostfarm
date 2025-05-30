@@ -1,0 +1,47 @@
+---
+import { div } from "motion/react-client";
+
+
+// Henter parametrene fra Astro.props
+
+const { variant= "primary", size = "medium" } = Astro.props; 
+
+ 
+//Definer den styling (Tailwind classes, der gør sig gældende for alle knapper
+const buttonStyling = "border-double border-4 p-8 rounded-xl hover:bg-red-600 active:bg-red-700 hover:text-white duration-1000 cursor-pointer hover:skew-x-20"; 
+
+ 
+//Definer den styling (Tailwind classes), der gør sig gældende for de forskellige varianter 
+
+const variantClasses = {
+
+"primary": "text-blue-600/100",
+
+"secondary": "text-white bg-red-500 underline hover:bg-blue-600",
+
+};
+
+ 
+//Definer den styling (Tailwind classes), der gør sig gældende for de forskelligeog størrelser.
+
+const sizeClasses = {
+
+"large": "text-xl font-bold",
+
+"medium": "text-m font-semibold",
+
+"small": "text-s font-light hover:-skew-x-20",
+
+};
+
+---
+
+<!--Sæt classes for den pågældende knap sammen ved hjælp af Astros class:list -->
+
+<button class:list={[buttonStyling, variantClasses[variant], sizeClasses[size]]}><slot /></button>
+
+
+
+<!-- Øvelse omkring knap styling <div>
+    <button class="border-double border-4 text-blue-600/100 p-8 rounded-xl hover:bg-red-600 active:bg-red-700 hover:text-white duration-1000 cursor-pointer ..."><slot /></button>
+</div> -->

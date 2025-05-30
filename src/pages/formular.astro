@@ -1,0 +1,30 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Button from '../components/Button.astro';
+import Link from '../components/Link.astro';
+import { Image } from 'astro:assets';
+import thumbsup from "../assets/images/thumbsup.png";
+---
+<MainLayout title="Formular">
+    <!-- class betyder her, at hver gang der er en div skal den styles på den her måde. fx med py-4 -->
+    <form class="[&>div]:py-4"> 
+        <label for="fname">Skriv dit navn her</label><br>
+        <input type="text" id="fname" name="fname" placeholder="Lars Larsen"><br>
+        <label for="adresse">Adresse</label><br>
+        <input type="text" id="adresse" name="adresse" placeholder="vej 70"><br>
+        <label for="By">By</label><br>
+        <input type="text" id="by" name="By" placeholder="1990 Brøndby">
+
+        <div class="">
+            <span>Tilmeld nyhedsbrev: </span> <br>
+            <input type="radio" id="Ja">
+            <label for="Ja" checked="checked"> Ja </label>
+            <input type="radio" id="Nej">
+            <label for="Nej" checked="checked"> Nej </label>
+        </div>
+        <label for="email">Email</label><br>
+        <input type="email" id="email" name="email" autocomplete="off" placeholder="email@hej.com"><br>
+      </form>
+
+      <Button> Send </Button>
+</MainLayout>
