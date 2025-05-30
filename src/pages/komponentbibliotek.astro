@@ -1,12 +1,12 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 import Button from "../components/Button.astro";
-import Heading from "../components/typography/Heading.astro";
-import Display from "../components/typography/Display.astro";
-import Bodytext from "../components/typography/Bodytext.astro";
-import Link from "../components/typography/Link.astro";
+import Heading from "../components/Heading.astro";
+import Display from "../components/Display.astro";
+import Bodytext from "../components/Bodytext.astro";
+import Link from "../components/Link.astro";
 import Badge from "../components/Badge.astro";
-import Card_Artist from "../components/Card_artist.astro";
+import Cardartist from "../components/Cardartist.astro";
 import TicketCard from "../components/TicketCard.astro";   
 import Faq from "../components/Faq.astro"; 
 import Hero2 from "../components/Hero2.astro";
@@ -154,7 +154,7 @@ const faqs = [
 <div class="flex flex-wrap gap-8 mb-10">
     <!-- Artist Cards Grid -->
     <div class="flex flex-col gap-4">
-        <Card_Artist
+        <Cardartist
             url="/singlepage"
             image="/artist1.webp"
             title="Dis Fig ft. Spooky"
