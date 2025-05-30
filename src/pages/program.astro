@@ -1,7 +1,7 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro"
 import Hero2 from "../components/Hero2.astro"
-import Cardartist from "../components/Cardartist.astro";
+import Artistcard from "../components/Artistcard.astro";
 /* Kunstner-array = datakilde. Mere fleksibel og vedligeholdelsesvenlig kode. Gør det muligt at implementere filter */
 const artists = [
   {
@@ -149,7 +149,7 @@ const artists = [
 <section id="artist-list" style="display: flex; flex-wrap: wrap;" class="artist-grid mb-10 md:mb-28 flex flex-wrap gap-4">
         {artists.map(artist => (
             <a href={artist.url} class="artist-card staggeranimation" data-badge={artist.badgeVariant} style="text-decoration: none; color: inherit;">
-                <Cardartist
+                <Artistcard
                     url={artist.url}
                     image={artist.image}
                     title={artist.title}
