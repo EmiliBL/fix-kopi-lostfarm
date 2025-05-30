@@ -126,6 +126,7 @@
   }
 }
 
+/* UI lir */
 @layer utilities {
   .blink-2 {
     animation: blink-2 3s infinite both;
