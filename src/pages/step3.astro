@@ -3,9 +3,11 @@ import Heading from '../components/Heading.astro';
 import Bodytext from '../components/Bodytext.astro';
 import Button from '../components/Button.astro';
 import MainLayout from '../layouts/MainLayout.astro';
+import Processbar from '../components/Processbar.astro';
 ---
 <MainLayout>
 
+  <Processbar />
     <!-- Progress bar -->
     <div class="flex justify-between mb-10 text-sm font-bold cursor-pointer">
       <a href="/step1" class="step font-montserrat font-bold text-lg px-4 py-2 text-primary-500" data-step="1">1</a>
